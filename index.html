@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="capil">
+  <head>
+    <meta charset="utf-8">
+    <title>Form Disdukcapil</title>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/jquery.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
+    <script src="assets/js/main.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="#" class="logo">Dispendukcapil</a></li>
+        <li><a href="#"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a></li>
+        <li><a href="#"><i class="fa fa-info fa-lg"></i>&nbsp;Bantuan</a></li>
+        <li><a href="#"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</a></li>
+      </ul>
+    </nav>
+    <div class="space">
+
+    </div>
+    <div class="container" ng-controller="form-title">
+      <div class="form-container">
+        <div class="form-head">
+          <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Pendaftaran</p>
+        </div>
+        <div class="form-pendaftaran">
+          <div class="" ng-view>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

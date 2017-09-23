@@ -1,0 +1,38 @@
+<fieldset>
+  <legend>Data Ayah</legend>
+</fieldset>
+<form class="group" action="index.html" method="post">
+  <label for="nik">NIK</label>
+  <input type="text" class="input" id="nik" placeholder="NIK" name="" value="">
+  <label for="">Nama lengkap</label>
+  <input type="text" class="input" placeholder="Nama lengkap" name="" value="">
+  <label for="">Tanggal lahir/Umur</label>
+  <input type="text" class="input" placeholder="Tanggal/Bulan/Tahun | umur" name="" value="">
+  <label for="">Pekerjaan</label>
+  <input type="text" class="input" placeholder="Pekerjaan" name="" value="">
+  <label for="">Alamat</label>
+  <input type="text" class="input" placeholder="Alamat" name="" value="">
+  <select class="input" name="">
+    <option value="">Desa/Kelurahan</option>
+  </select>
+  <select class="input" name="">
+    <option value="">Kecamatan</option>
+  </select>
+  <select class="input" name="">
+    <option value="">Kota/Kab</option>
+  </select>
+  <select class="input" name="">
+    <option value="">Provinsi</option>
+  </select>
+  <label for="">Kewarganegaraan</label>
+  <select class="input" name="">
+    <option value="1">WNI</option>
+    <option value="2">WNA</option>
+  </select>
+  <label for="">Kebangsaan</label>
+  <input type="text" readonly  name="" value="Indonesia" class="input">
+  <hr>
+  <button type="button" ng-click="next('halaman3')" class="btn btn-prev" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Sebelumnya</button>
+  <button type="button" ng-click="next('halaman5')" class="btn btn-next" name="button"><i class="fa fa-angle-right fa-lg"></i>&nbsp;Selanjutnya</button>
+  <code>4 / 7 Halaman</code>
+</form>
