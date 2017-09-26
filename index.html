@@ -1,38 +1,101 @@
 <!DOCTYPE html>
-<html ng-app="capil">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Form Disdukcapil</title>
-    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <title>Pendaftaran Akte Kelahiran</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
-    <script src="assets/js/angular.min.js" charset="utf-8"></script>
-    <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
   <body>
     <nav class="navbar">
+      <a href="#" class="btn btn-collapse"><i class="fa fa-bars fa-lg"></i></a>
       <ul class="menu">
         <li><a href="#" class="logo">Dispendukcapil</a></li>
-        <li><a href="#"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a></li>
-        <li><a href="#"><i class="fa fa-info fa-lg"></i>&nbsp;Bantuan</a></li>
-        <li><a href="#"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</a></li>
+        <li><a href="#"><i class="fa fa-question-circle fa-lg"></i>&nbsp;Bantuan</a></li>
+        <li><a href="login.html"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</a></li>
       </ul>
     </nav>
     <div class="space">
-
     </div>
-    <div class="container" ng-controller="form-title">
-      <div class="form-container">
-        <div class="form-head">
-          <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Pendaftaran</p>
-        </div>
-        <div class="form-pendaftaran">
-          <div class="" ng-view>
+    <div class="container">
+      <div class="body">
+        <header class="title">
+          Pendaftaran Akte kelahiran Online
+        </header>
+        <p class="subtitle">Dinas Kependudukan dan Catatan Sipil</p>
+        <hr>
+        <div class="row">
+          <div class="col-3">
+            <div class="body card">
+              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <header class="icon">
+                <i class="fa fa-wpforms fa-lg"></i>
+              </header>
+              <hr>
+              <h4>Pendaftaran</h4>
+              <div class="spaces"></div>
+              <button type="button" class="btn btn-card btn-card-red" name="button">DAFTAR</button>
+            </div>
           </div>
+          <div class="col-3">
+            <div class="body card">
+              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <header class="icon">
+                <i class="fa fa-check fa-lg blue"></i>
+              </header>
+              <hr>
+              <h4>Cek status</h4>
+              <div class="spaces"></div>
+              <button type="button" id="cek_status" class="btn btn-card btn-card-blue" name="button">CEK</button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="body card">
+              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <header class="icon">
+                <i class="fa fa-upload fa-lg orange"></i>
+              </header>
+              <hr>
+              <h4>Upload Berkas</h4>
+              <div class="spaces"></div>
+              <button type="button" id="upload_file" class="btn btn-card btn-card-orange" name="button">UPLOAD</button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="body card">
+              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <header class="icon">
+                <i class="fa fa-archive fa-lg green"></i>
+              </header>
+              <hr>
+              <h4>Verifikasi Berkas</h4>
+              <div class="spaces"></div>
+              <button type="button" class="btn btn-card btn-card-green" name="button">VERIFIKASI</button>
+            </div>
+          </div>
+          <!--  -->
         </div>
+        <!-- row  -->
+      </div>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-window">
+        <div class="modal-titlebar">
+          <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran</p>
+        </div>
+        <div class="modal-content">
+          <h2><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran</h2>
+          <hr>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal" name="button"><i class="fa fa-times-circle fa-lg"></i>&nbsp;Tutup</button>
         </div>
       </div>
     </div>
+    <footer>Tagconn&copy; | 2017</footer>
   </body>
 </html>
