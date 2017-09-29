@@ -1,5 +1,5 @@
 var app = angular.module('capil', ['ngRoute']);
-var baseUrl = window.location.origin + "/capil/pendaftaran.html";
+var baseUrl = window.location.origin + "/form_capil/pendaftaran.html";
 
 app.config(function($routeProvider){
   $routeProvider
@@ -26,16 +26,74 @@ app.config(function($routeProvider){
   })
 });
 
+app.controller('login', function($scope){
+  var user = {
+    username : "admin",
+    password : "admin"
+  }
+
+  $scope.login = function(username, password)
+  {
+    if (username == user.username && password == user.password)
+    {
+      alert("Login berhasil");
+    }
+    else
+    {
+      alert('Login gagal...');
+    }
+  }
+})
+
 app.controller('form-title', function($scope, $location){
 
   $scope.next = function(halamanBerikut)
   {
     window.location.replace(baseUrl + "#!/"+ halamanBerikut);
   }
+});
 
-  $scope.submit = function()
+app.controller('home', function($scope){
+  var data = [{
+    title : "Pendaftaran",
+    deskripsi : "Pendaftaran akte kelahiran"
+  },
   {
-    var data = {};
+    title : "Upload berkas",
+    deskripsi : "Upload berkas yang diperlukan untuk melengkapi pendaftaran."
+  },
+  {
+    title : "Cek Berkas",
+    deskripsi : "Cek kelengkapan berkas yang di masukkan"
+  },
+  {
+    title : "Cek status",
+    deskripsi : "Cek status pendaftaran"
+  }
+  ];
+
+  $scope.modal = function(title)
+  {
+    if (title == 'pendaftaran')
+    {
+      $scope.title = data[0].title;
+      $scope.deskripsi = data[0].deskripsi;
+    }
+    else if (title == 'upload')
+    {
+      $scope.title = data[1].title;
+      $scope.deskripsi = data[1].deskripsi;
+    }
+    else if (title == 'cek')
+    {
+      $scope.title = data[2].title;
+      $scope.deskripsi = data[2].deskripsi;
+    }
+    else
+    {
+      $scope.title = data[3].title;
+      $scope.deskripsi = data[3].deskripsi;
+    }
   }
 })
 
@@ -52,6 +110,10 @@ $(document).ready(function(){
 
   $('#upload_file').click(function(){
     window.location.replace('upload_file.html');
+  });
+
+  $('#daftar').click(function(){
+    window.location.replace('pendaftaran.html');
   });
 
   $('.btn-modal').click(function(){
@@ -76,6 +138,10 @@ $(document).ready(function(){
       }
     }
   });
+
+  $('form').on('submit', function(e){
+    return false;
+  })
 
   $('.btn-collapse').click(function(){
     $('.menu li').not('.menu li:first-child').slideToggle();

@@ -153,6 +153,7 @@ code:after {
 @media screen and (max-width : 640px) {
   .col-3 { width: 25% !important;}
   .col-6 { width: 100% !important;}
+  .col-4 {width: 100%;}
 }
 
 @media screen and (max-width : 550px) {
@@ -231,7 +232,7 @@ code:after {
 
 /* Navbar */
 .navbar {
-  background: #3d8e96;
+  background: #d95e57;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -439,8 +440,8 @@ select > .input {
 
 .content-head {
   border-radius: 5px;
-  background: #ddd;
-  color: #444;
+  background: #dd973c;
+  color: white;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
@@ -586,6 +587,7 @@ select > .input {
 }
 
 .btn-card {
+  cursor: pointer;
   color: white;
   position: absolute;
   bottom : 0;

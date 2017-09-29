@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="capil">
   <head>
     <meta charset="utf-8">
     <title>Login</title>
@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="assets/css/font-awesome.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body ng-controller="login">
     <nav class="navbar">
       <ul class="menu">
+        <button type="button" class="btn btn-collapse" name="button"><i class="fa fa-bars fa-lg"></i></button>
         <li><a href="#" class="logo">Dispendukcapil</a></li>
         <li><a href="index.html"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a></li>
         <li><a href="#"><i class="fa fa-question-circle fa-lg"></i>&nbsp;Bantuan</a></li>
@@ -30,12 +33,14 @@
             </div>
             <hr>
             <div class="container">
-              <label for="">Username</label>
-              <input type="text" class="input" placeholder="Username" name="" value="">
-              <label for="">Password</label>
-              <input type="password" class="input" placeholder="Password" name="" value="">
-              <br>
-              <button type="button" class="btn btn-next" name="button"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</button>
+              <form class="group" action="index.html" method="post">
+                <label for="">Username</label>
+                <input type="text" class="input" ng-model="username" placeholder="Username" name="" value="">
+                <label for="">Password</label>
+                <input type="password" class="input" ng-model="password" placeholder="Password" name="" value="">
+                <br>
+                <button type="submit" ng-click="login(username, password)" class="btn btn-next" name="button"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</button>
+              </form>
             </div>
           </div>
         </div>

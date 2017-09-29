@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="capil">
   <head>
     <meta charset="utf-8">
     <title>Pendaftaran Akte Kelahiran</title>
@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="assets/css/font-awesome.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body ng-controller="home">
     <nav class="navbar">
       <a href="#" class="btn btn-collapse"><i class="fa fa-bars fa-lg"></i></a>
       <ul class="menu">
@@ -30,31 +32,19 @@
         <div class="row">
           <div class="col-3">
             <div class="body card">
-              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <span class="info" title="Bantuan" ng-click="modal('pendaftaran')"><i class="fa fa-info-circle fa-lg"></i></span>
               <header class="icon">
                 <i class="fa fa-wpforms fa-lg"></i>
               </header>
               <hr>
               <h4>Pendaftaran</h4>
               <div class="spaces"></div>
-              <button type="button" class="btn btn-card btn-card-red" name="button">DAFTAR</button>
+              <button type="button" class="btn btn-card btn-card-red" id="daftar" name="button">DAFTAR</button>
             </div>
           </div>
           <div class="col-3">
             <div class="body card">
-              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
-              <header class="icon">
-                <i class="fa fa-check fa-lg blue"></i>
-              </header>
-              <hr>
-              <h4>Cek status</h4>
-              <div class="spaces"></div>
-              <button type="button" id="cek_status" class="btn btn-card btn-card-blue" name="button">CEK</button>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="body card">
-              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <span class="info" ng-click="modal('upload')" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
               <header class="icon">
                 <i class="fa fa-upload fa-lg orange"></i>
               </header>
@@ -66,14 +56,26 @@
           </div>
           <div class="col-3">
             <div class="body card">
-              <span class="info" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <span class="info" ng-click="modal('cek')" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
               <header class="icon">
                 <i class="fa fa-archive fa-lg green"></i>
               </header>
               <hr>
-              <h4>Verifikasi Berkas</h4>
+              <h4>Cek Berkas</h4>
               <div class="spaces"></div>
               <button type="button" class="btn btn-card btn-card-green" name="button">VERIFIKASI</button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="body card">
+              <span class="info" ng-click="modal('cek_status')" title="Bantuan"><i class="fa fa-info-circle fa-lg"></i></span>
+              <header class="icon">
+                <i class="fa fa-check fa-lg blue"></i>
+              </header>
+              <hr>
+              <h4>Cek status</h4>
+              <div class="spaces"></div>
+              <button type="button" id="cek_status" class="btn btn-card btn-card-blue" name="button">CEK</button>
             </div>
           </div>
           <!--  -->
@@ -84,12 +86,12 @@
     <div id="modal" class="modal">
       <div class="modal-window">
         <div class="modal-titlebar">
-          <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran</p>
+          <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;{{ title }}</p>
         </div>
         <div class="modal-content">
-          <h2><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran</h2>
+          <h2><i class="fa fa-info-circle fa-lg"></i>&nbsp;{{ title }}</h2>
           <hr>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>{{ deskripsi }}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal" name="button"><i class="fa fa-times-circle fa-lg"></i>&nbsp;Tutup</button>

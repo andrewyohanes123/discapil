@@ -1,10 +1,9 @@
   <form id="Form1" class="group" action="index.html" method="post">
-    <label for="nama_kk">Nama Kepala Keluarga</label>
-    <input type="text" class="input" id="nama_kk" placeholder="Nama kepala keluarga">
     <label for="no_kk">Nomor Kartu Keluarga</label>
-    <input type="text" class="input" id="no_kk" placeholder="Nomor Kartu Keluarga">
+    <input ng-model="no_kk" type="text" class="input" id="no_kk" placeholder="Nomor Kartu Keluarga">
+    <label for="nama_kk">Nama Kepala Keluarga</label>
+    <input value="{{no_kk}}" readonly type="text" class="input" id="nama_kk" placeholder="Nama kepala keluarga">
     <hr>
     <button type="button" class="btn btn-next" ng-click="next('halaman2')" name="button"><i class="fa fa-angle-right fa-lg"></i>&nbsp;Masukkan data</button>
-
     <code>1 / 7 halaman</code>
   </form>
