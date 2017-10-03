@@ -9,7 +9,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background: #eee;
+  background: #ffffff;
   font-family: sans-serif;
 }
 
@@ -408,25 +408,56 @@ code:after {
 }
 
 .input {
-  padding: 5px 15px;
+  padding: 6.5px 15px;
   width: 100%;
   margin: 5px auto;
   box-sizing: border-box;
   border-style: none;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.34);
+  border: .5px solid #47a3d0;
   font-size: 15px;
   border-radius: 5px;
 }
 
-select > .input {
-  padding: 5px 15px;
+.input-group {
+  display: flex;
   width: 100%;
-  margin: 5px auto;
-  box-sizing: border-box;
-  border-style: none;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.34);
-  font-size: 15px;
+  overflow: hidden;
   border-radius: 5px;
+  border: 1px solid #47a3d0;
+}
+
+.input-group::after {
+  display: block;
+  content : " ";
+  clear: both;
+}
+
+.input-group .input-addon {
+  background: #acdbc5;
+  padding: 6.5px 15px;
+  margin: 0;
+  float: left;
+  /*border-radius: 5px;*/
+  display: inline-block;
+  width: 20%;
+  overflow: hidden;
+  /*flex: 3;*/
+}
+
+.input-group .input {
+  margin: 0;
+  float: left;
+  display: inline-block;
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+}
+
+.input-group .input:focus ~ .input-addon {
+  /*background : #333;*/
+  outline-style: none;
+  box-shadow: 0px 0px 0px 2px rgba(12, 135, 249, 0.54);
+  transition: .35s all ease-in-out;
 }
 
 .input:focus {
@@ -769,7 +800,7 @@ select > .input {
   right: 0;
   height: 100vh;
   top : 0px;
-  background: #d9ece7;
+  background: #f2f2f2;
   overflow: auto;
   z-index: 20;
 }
