@@ -102,7 +102,30 @@ $(document).ready(function(){
   $('span.info').click(function(){
     $('#modal').css('display', 'block');
     $('body').css('overflow', 'hidden');
+  });
+
+  $('.submenu li a').click(function(){
+    $('.submenu li a').removeClass('submenu-active');
+    $('.sidebar-menu li:first-child a').removeClass('active');
+    $(this).addClass('submenu-active');
   })
+
+  $('.sidebar-menu li:first-child a').not('.submenu li:first-child a').click(function(){
+    $('.submenu li a').removeClass('submenu-active');
+    $('.sidebar-menu li:first-child a').not('.submenu li:first-child a').addClass('active');
+  })
+
+  $('.sidebar-menu').children('li').children('a').click(function(){
+    $(this).parent().children('.submenu').slideToggle();
+    $(this).children('span').children('i').toggleClass('fa-angle-right');
+    $(this).children('span').children('i').toggleClass('fa-angle-down');
+    // return false;
+  });
+
+  $('.head').click(function(){
+    $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
+    $(this).siblings('div.collapse-body').slideToggle();
+  });
 
   $('#cek_status').click(function(){
     window.location.replace('cek_status.html');
