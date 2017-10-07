@@ -383,17 +383,54 @@ code:after {
 
 .form-head {
   background: #00B294;
-  padding: 10px 20px;
+  padding: 0px 0px;
   color: white;
 }
 
 .form-head .form-title {
   margin: 0 auto;
+  padding: 10px 20px;
+}
+
+.form-head .tabs {
+  padding-top : 5px;
+  margin-top: 5px;
+  border-bottom-color: white;
+  margin-bottom: 0px;
+}
+
+.form-head .tabs .tab {
+  background: #00b294;
+  border-color: white;
+  color: white;
+  /*width: 50% !important;*/
+  width: auto;
+}
+
+.form-head .tabs .tab:hover {
+  background: #0b8b75;
+}
+
+.form-head .tabs .click {
+  color: #00b294;
 }
 
 .form-pendaftaran {
   background: #f6f6f6;
-  padding: 10px 15px;
+  padding: 10px 0px;
+}
+
+.form-pendaftaran form.group {
+  padding: 5px 15px;
+}
+
+.form-pendaftaran .tabs {
+  margin-top: 0;
+}
+
+.form-pendaftaran .tabs .tab:first-child {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .form-pendaftaran .group {
@@ -705,6 +742,138 @@ code:after {
 .body hr {
   clear: both;
 }
+
+/* Notifikasi */
+.notifikasi {
+  display: flex;
+  overflow: hidden;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 300;
+  top : 60px;
+  left : 50%;
+  transform: translate(-50%);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.33);
+  animation: notif-in 500ms forwards;
+  display: none;
+}
+
+.notifikasi .notifikasi-body {
+  background: #7ccddb;
+  font-weight: lighter;
+  padding: 15px 15px;
+  flex: 1;
+  font-size: 20px;
+  color: white;
+}
+
+.notifikasi .notifikasi-body::after {
+  display: block;
+  content: " ";
+  clear: both;
+}
+
+.notifikasi .notifikasi-body .notifikasi-close {
+  float: right;
+  margin: 5px 5px;
+  margin-left: 20px;
+  font-size: 15px;
+  color: maroon;
+}
+
+.notifikasi .notifikasi-icon {
+  background: #555;
+  color: white;
+  padding: 15px 15px;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.notifikasi .notifikasi-icon i {
+  animation-delay: 500ms;
+  animation: bell-in 500ms forwards;
+}
+
+@keyframes notif-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%) rotateX(-90deg);
+  }
+  50% {
+    transform: rotateX(1deg) translate(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) translate(-50%);
+  }
+}
+
+
+@keyframes bell-in {
+  0% {
+    /*opacity: 0;*/
+    transform: translateY(-500px);
+  }
+  50% {
+    transform:translateY(1px);
+  }
+  100% {
+    /*opacity: 1;*/
+    transform:  translateY(-5%);
+  }
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  padding: 0;
+  margin: 15px auto;
+  width: 100%;
+  border-bottom : 1px solid #00B294;
+  /*padding-left: 10px;*/
+}
+
+.tabs .tab {
+  background: #f9f9f9;
+  color: #00B294;
+  padding: 10px 15px;
+  width: 100%;
+  display: inline-block;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin: 0 .5px;
+  border-top : 1px solid #00B294;
+  border-left : 1px solid #00B294;
+  border-right : 1px solid #00B294;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.tabs .tab:hover {
+  background: #eee;
+}
+
+.tabs .tab a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tabs .click {
+  background: #f6f6f6 !important;
+  margin-bottom: -1px;
+  /*border: 1px solid black !important;*/
+}
+
+.tabs .click:hover {
+  background: #fafafa !important;
+  /*border: 1px solid black !important;*/
+}
+
+#luar_manado {
+  display: none;
+}
+
 /* -- Modal window -- */
 
 #modal {

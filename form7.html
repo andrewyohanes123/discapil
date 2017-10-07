@@ -1,32 +1,54 @@
-<form class="group" action="index.html" method="post">
-  <fieldset>
-    <legend>Saksi II</legend>
-  </fieldset>
-  <label for="">NIK</label>
-  <input type="text" class="input" placeholder="NIK" name="" value="">
-  <label for="">Nama lengkap</label>
-  <input type="text" class="input" placeholder="Nama lengkap" name="" value="">
-  <label for="">Tanggal lahir/Umur</label>
-  <input type="text" class="input" placeholder="Tanggal/Bulan/Tahun - Umur" name="" value="">
-  <label for="">Jenis Kelamin</label>
-  <input type="text" class="input" placeholder="Jenis Kelamin" name="" value="">
-  <label for="">Pekerjaan</label>
-  <input type="text" class="input" placeholder="Pekerjaan" name="" value="">
-  <label for="">Alamat</label>
-  <select class="input" name="">
-    <option value="">Desa/Kelurahan</option>
-  </select>
-  <select class="input" name="">
-    <option value="">Kecamatan</option>
-  </select>
-  <select class="input" name="">
-    <option value="">Kota/Kab</option>
-  </select>
-  <select class="input" name="">
-    <option value="">Provinsi</option>
-  </select>
-  <hr>
-  <button type="button" class="btn btn-prev" ng-click="next('halaman6')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Sebelumnya</button>
-  <button type="button" class="btn btn-next" ng-click="submit()" name="button"><i class="fa fa-save fa-lg"></i>&nbsp;Masukkan data</button>
-  <code>7 / 7 Halaman</code>
-</form>
+<div class="container" ng-controller="form-title">
+  <div class="form-container">
+    <div class="form-head">
+      <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Saksi II</p>
+      <div class="tabs">
+        <div class="tab click" id="dlmManado">
+          <a href="javascript:void(0);"><i class="fa fa-map-marker fa-lg"></i>&nbsp;Manado</a>
+        </div>
+        <div class="tab" id="luarManado">
+          <a href="javascript:void(0);"><i class="fa fa-map-o fa-lg"></i>&nbsp;Luar Manado</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-pendaftaran">
+      <form class="group" action="index.html" method="post">
+        <div id="manado">
+          <label for="">NIK</label>
+          <input type="number" class="input" placeholder="NIK" name="" value="">
+          <label for="">Nama lengkap</label>
+          <input type="text" readonly class="input" placeholder="Nama lengkap" name="" value="">
+        </div>
+        <div id="luar_manado">
+          <label for="">NIK</label>
+          <input type="text" class="input" placeholder="NIK" name="" value="">
+          <label for="">Nama lengkap</label>
+          <input type="text" class="input" placeholder="Nama lengkap" name="" value="">
+          <label for="">Tanggal lahir/Umur</label>
+          <input type="text" class="input" placeholder="Tanggal/Bulan/Tahun - Umur" name="" value="">
+          <label for="">Jenis Kelamin</label>
+          <input type="text" class="input" placeholder="Jenis Kelamin" name="" value="">
+          <label for="">Pekerjaan</label>
+          <input type="text" class="input" placeholder="Pekerjaan" name="" value="">
+          <label for="">Alamat</label>
+          <select class="input" name="">
+            <option value="">Desa/Kelurahan</option>
+          </select>
+          <select class="input" name="">
+            <option value="">Kecamatan</option>
+          </select>
+          <select class="input" name="">
+            <option value="">Kota/Kab</option>
+          </select>
+          <select class="input" name="">
+            <option value="">Provinsi</option>
+          </select>
+        </div>
+        <hr>
+        <button type="button" class="btn btn-prev" ng-click="next('halaman6')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Sebelumnya</button>
+        <button type="button" class="btn btn-next" name="button"><i class="fa fa-save fa-lg"></i>&nbsp;Simpan</button>
+        <code>7 / 7 Halaman</code>
+      </form>
+    </div>
+  </div>
+</div>
