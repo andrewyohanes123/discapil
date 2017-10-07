@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Disdukcapil</title>
+    <title>Pendaftaran akte kelahiran | Dinas Kependudukan dan Pencatatan Sipil</title>
     <link rel="stylesheet" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
@@ -21,19 +21,17 @@
         <li><a href="login.html"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</a></li>
       </ul>
     </nav>
-    <div class="space">
-
+    <div class="notifikasi" ng-controller="form-title">
+      <div class="notifikasi-icon">
+        <i class="fa fa-bell fa-lg"></i>
+      </div>
+      <div class="notifikasi-body">
+        {{ pesan }}
+        <i class="fa fa-times fa-lg notifikasi-close"></i>
+      </div>
     </div>
-    <div class="container" ng-controller="form-title">
-      <div class="form-container">
-        <div class="form-head">
-          <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Pendaftaran</p>
-        </div>
-        <div class="form-pendaftaran">
-          <div class="" ng-view>
-          </div>
-        </div>
-        </div>
+    <div class="space"></div>
+      <div class="" ng-view>
       </div>
     </div>
   </body>

@@ -4,7 +4,8 @@ var baseUrl = window.location.origin + "/form_capil/pendaftaran.html";
 app.config(function($routeProvider){
   $routeProvider
   .when('/', {
-    templateUrl : "form1.html"
+    templateUrl : "form1.html",
+    controller: "no_kk"
   })
   .when('/halaman2', {
     templateUrl : "form2.html"
@@ -26,6 +27,41 @@ app.config(function($routeProvider){
   })
 });
 
+app.controller('no_kk', function($scope){
+  var no_kk = {
+    no_kk : 1234567890,
+    nama_kk : "Kepala keluarga"
+  }
+
+  $('#no_kk').on('keyup', function(){
+    var no = $(this).val()
+    // console.log('ada');
+    if (no == no_kk.no_kk)
+    {
+      console.log('sama');
+      $scope.nama_kk = no_kk.nama_kk;
+    }
+  });
+
+  $('#btn').click(function(){
+    if ($scope.nomor == '' || $scope.nomor == null)
+    {
+      $('.notifikasi-body').empty();
+      $('.notifikasi').css('display', 'flex');
+      $('.notifikasi-body').append('Nomor KK kosong!');
+      setTimeout(function(){
+        $('.notifikasi').fadeOut();
+      },1500);
+    }
+    else
+    {
+      $('#btn').attr('ng-click', 'next("halaman2")');
+    }
+  });
+
+  // console.log($scope.no_kk);
+});
+
 app.controller('login', function($scope){
   var user = {
     username : "admin",
@@ -45,12 +81,40 @@ app.controller('login', function($scope){
   }
 })
 
+// app.factory('data-orang', function())
+
 app.controller('form-title', function($scope, $location){
 
   $scope.next = function(halamanBerikut)
   {
     window.location.replace(baseUrl + "#!/"+ halamanBerikut);
   }
+
+  var orang = [
+    {
+      nik : 123456789,
+      nama : "Seseorang sadja"
+    },
+    {
+      nik : 987654321,
+      nama : "Orang begitu sadja"
+    },
+    {
+      nik : 567891234,
+      nama : "Begitu begitu"
+    },
+    {
+      nik : 432156789,
+      nama : "Seseorang begitu"
+    },
+    {
+      nik : 987123456,
+      nama : "Kepala keluarga"
+    }
+  ]
+
+  // console.log($scope.no_kk);
+
 });
 
 app.controller('home', function($scope){
@@ -71,6 +135,7 @@ app.controller('home', function($scope){
     deskripsi : "Cek status pendaftaran"
   }
   ];
+
 
   $scope.modal = function(title)
   {
@@ -164,7 +229,21 @@ $(document).ready(function(){
 
   $('form').on('submit', function(e){
     return false;
-  })
+  });
+
+  $(document).on('click', '#dlmManado',function(){
+    $('#manado').show();
+    $('#luar_manado').hide();
+    $('.tab').removeClass('click');
+    $(this).addClass('click');
+  });
+
+  $(document).on('click', '#luarManado',function(){
+    $('#manado').hide();
+    $('#luar_manado').show();
+    $('.tab').removeClass('click');
+    $(this).addClass('click');
+  });
 
   $('.btn-collapse').click(function(){
     $('.menu li').not('.menu li:first-child').slideToggle();
