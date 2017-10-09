@@ -43,21 +43,21 @@ app.controller('no_kk', function($scope){
     }
   });
 
-  $('#btn').click(function(){
-    if ($scope.nomor == '' || $scope.nomor == null)
-    {
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').append('Nomor KK kosong!');
-      setTimeout(function(){
-        $('.notifikasi').fadeOut();
-      },1500);
-    }
-    else
-    {
-      $('#btn').attr('ng-click', 'next("halaman2")');
-    }
-  });
+  // $('#btn').click(function(){
+  //   if ($scope.nomor == '' || $scope.nomor == null)
+  //   {
+  //     $('.notifikasi-body').empty();
+  //     $('.notifikasi').css('display', 'flex');
+  //     $('.notifikasi-body').append('Nomor KK kosong!');
+  //     setTimeout(function(){
+  //       $('.notifikasi').fadeOut();
+  //     },1500);
+  //   }
+  //   else
+  //   {
+  //     $('#btn').attr('ng-click', 'next("halaman2")');
+  //   }
+  // });
 
   // console.log($scope.no_kk);
 });
