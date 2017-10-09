@@ -43,7 +43,6 @@ app.controller('no_kk', function($scope){
     }
   });
 
-<<<<<<< HEAD
   // $('#btn').click(function(){
   //   if ($scope.nomor == '' || $scope.nomor == null)
   //   {
@@ -59,23 +58,6 @@ app.controller('no_kk', function($scope){
   //     $('#btn').attr('ng-click', 'next("halaman2")');
   //   }
   // });
-=======
-  $('#btn').click(function(){
-    if ($scope.nomor == '' || $scope.nomor == null)
-    {
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').append('Nomor KK kosong!');
-      setTimeout(function(){
-        $('.notifikasi').fadeOut();
-      },1500);
-    }
-    else
-    {
-      $('#btn').attr('ng-click', 'next("halaman2")');
-    }
-  });
->>>>>>> 19e4a859ad1d842933b67ef0c893328ac8c70489
 
   // console.log($scope.no_kk);
 });
