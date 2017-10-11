@@ -445,6 +445,10 @@ code:after {
   clear: both;
 }
 
+select.input {
+  height: 30px;
+}
+
 .input {
   padding: 6.5px 15px;
   width: 100%;
