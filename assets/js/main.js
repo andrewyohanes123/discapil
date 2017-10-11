@@ -204,6 +204,10 @@ $(document).ready(function(){
     window.location.replace('pendaftaran.html');
   });
 
+  $('#file').click(function(){
+    window.location.replace('berkas.html');
+  });
+
   $('.btn-modal').click(function(){
     $('.modal-window').css('animation', 'modal-out 750ms forwards');
     $('body').css('overflow', 'auto');
@@ -229,6 +233,20 @@ $(document).ready(function(){
 
   $('form').on('submit', function(e){
     return false;
+  });
+
+  $('#bantuan').click(function(){
+    $('#divBantuan').show();
+    $('#divAlur').hide();
+    $('.tab').removeClass('click');
+    $(this).addClass('click')
+  });
+
+  $('#alur').click(function(){
+    $('#divBantuan').hide();
+    $('#divAlur').show();
+    $('.tab').removeClass('click');
+    $(this).addClass('click')
   });
 
   $(document).on('click', '#dlmManado',function(){
