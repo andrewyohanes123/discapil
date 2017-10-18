@@ -9,6 +9,7 @@
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
     <script src="assets/js/angular.min.js" charset="utf-8"></script>
     <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-cookies.min.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
   <body ng-controller="login">
@@ -22,6 +23,14 @@
       </ul>
     </nav>
     <div class="space">
+    </div>
+    <div class="notifikasi">
+      <div class="notifikasi-icon">
+        <i class="fa fa-bell fa-lg"></i>
+      </div>
+      <div class="notifikasi-body">
+        
+      </div>
     </div>
     <div class="container">
       <div class="row middle">
@@ -46,6 +55,14 @@
         </div>
         <div class="col-4"></div>
       </div>
+    </div>
+    <div class="error">
+      <h1>PHP Error</h1>
+      <p><b>type : </b>{{ type }}</p>
+      <p><b>message : </b>{{ msg }}</p>
+      <p><b>file : </b>{{ file }}</p>
+      <p><b>line : </b>{{ line }}</p>
+      <p><b>code : </b>{{ code }}</p>
     </div>
   </body>
 </html>

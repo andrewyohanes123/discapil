@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dash">
   <head>
     <meta charset="utf-8">
     <meta charset="utf-8">
@@ -9,20 +9,22 @@
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
     <script src="assets/js/angular.min.js" charset="utf-8"></script>
     <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-cookies.min.js" charset="utf-8"></script>
+    <script src="assets/js/moment.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
   <body>
     <nav class="navbar">
       <ul class="menu">
         <li><a href="#" class="logo">Dispendukcapil</a></li>
-        <li><a href="#"><i class="fa fa-sign-in fa-lg"></i>&nbsp;Login</a></li>
+        <li><a href="javascript:void(0);"><i class="fa fa-sign-out fa-lg"></i>&nbsp;Logout</a></li>
       </ul>
     </nav>
     <div class="wrapper">
       <div class="sidebar-area">
         <div class="sidebar">
-          <span class="user">
-            <a href="#"><i class="fa fa-user-circle fa-lg"></i>&nbsp;Pengguna</a>
+          <span class="user" ng-controller="username">
+            <a href="#"><i class="fa fa-user-circle fa-lg"></i>&nbsp;{{ username }}</a>
           </span>
           <ul class="sidebar-menu">
             <li><a href="#" class="active"><i class="fa fa-dashboard fa-lg"></i>&nbsp;Dashboard</a></li>
@@ -56,13 +58,8 @@
             <div class="content-head">
               <p><i class="fa fa-dashboard fa-lg"></i>&nbsp;Dashboard</p>
             </div>
-            <div class="container">
-              <div class="input-group">
-                <span class="input-addon">Sesusatu</span>
-                <input type="text" class="input" name="" value="">
-                <!-- <span class="input-addon">Test 3</span> -->
-              </div>
-            </div>
+          </div>
+          <div ng-view>
           </div>
         </div>
       </div>

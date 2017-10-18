@@ -1,4 +1,4 @@
-<div class="container" ng-controller="form-title">
+<div class="container">
   <div class="form-container">
     <div class="form-head">
       <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Data Ayah</p>
@@ -6,13 +6,16 @@
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
         <label for="nik">NIK</label>
-        <input type="text" class="input" id="nik" ng-model="nik_ayah" placeholder="NIK" name="" value="">
+        <div class="input-group">
+          <input type="text" class="input" id="nik" ng-model="nik_ayah" placeholder="NIK">
+          <span class="input-addon-btn">
+            <button type="button" class="btn btn-check"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+          </span>
+        </div>
         <label for="">Nama lengkap</label>
-        <input type="text" class="input" placeholder="Nama lengkap" ng-model="nama_ayah" name="" value="" readonly>
+        <input type="text" class="input" id="nama_ayah" placeholder="Nama lengkap" ng-model="nama_ayah" name="" value="" readonly>
         <hr>
-        <button type="button" ng-click="next('halaman3')" class="btn btn-prev" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Sebelumnya</button>
-        <button type="button" ng-click="next('halaman5')" class="btn btn-next" name="button"><i class="fa fa-angle-right fa-lg"></i>&nbsp;Selanjutnya</button>
-        <code>4 / 7 Halaman</code>
+        <button type="submit"  class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
   </div>

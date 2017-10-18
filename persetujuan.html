@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="form-container">
+    <div class="form-head">
+      <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Data keluarga</p>
+    </div>
+    <div class="form-pendaftaran">
+      <form class="group" action="index.html" method="post">
+        <label for="">Nomor Telepon</label>
+        <input type="number" class="input" placeholder="Nomor Telepon" id="nomor_telp" ng-model="nomor_telp">
+        <label for="">Alamat</label>
+        <input type="text" class="input" placeholder="Alamat Lengkap" id="alamat" ng-model="alamat" name="" value="">
+        <label for="">Pernyataan</label>
+        <textarea name="name" rows="3" ng-model="pernyataan" id="pernyataan" class="input" placeholder="Pernyataan" cols="80"></textarea>
+        <label for="check"><input type="checkbox" id="check" ng-model="setuju" name="" value=""> Saya setuju</label><br>
+        <button type="button" ng-disabled="setuju == false" class="btn btn-next" name="button"><i class="fa fa-save fa-lg"></i>&nbsp;Simpan</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="modal" class="modal">
+  <div class="modal-window">
+    <div class="modal-titlebar">
+      <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran berhasil</p>
+    </div>
+    <div class="modal-content">
+      <h2><i class="fa fa-info-circle fa-lg"></i>&nbsp;Nomor pendaftaran Anda :</h2>
+      <h1 class="nomor-daftar">{{ nomor_daftar }}</h1>
+      <hr>
+      <button type="button" class="btn btn-prev" name="button"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
+      <a href="#" class="btn btn-next"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-modal" name="button"><i class="fa fa-times-circle fa-lg"></i>&nbsp;Tutup</button>
+    </div>
+  </div>
+</div>
+<div class="error">
+  <h1>PHP Error</h1>
+  <p><b>type : </b>{{ type }}</p>
+  <p><b>message : </b>{{ msg }}</p>
+  <p><b>file : </b>{{ file }}</p>
+  <p><b>line : </b>{{ line }}</p>
+  <p><b>code : </b>{{ code }}</p>
+</div>

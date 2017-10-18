@@ -1,62 +1,72 @@
-<div class="container" ng-controller="form-title">
+<div class="container">
   <div class="form-container">
     <div class="form-head">
-      <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Bayi/</p>
+      <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Bayi/Anak</p>
     </div>
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
-        <label for="nama">Nama</label>
-        <input type="text" class="input" placeholder="Nama" name="" />
+        <label for="nama_bayi">Nama</label>
+        <input type="text" ng-model="nama" id="nama_bayi" class="input" placeholder="Nama" name="" />
+        <h5 id="nama_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Nama tidak boleh kosong</h5>
         <label for="jeniskel">Jenis Kelamin</label>
-        <select class="input" name="">
-          <option value="1">Laki - laki</option>
-          <option value="2">Perempuan</option>
+        <select ng-model="jen_kel" class="input" name="">
+          <option value="Laki-laki">Laki - laki</option>
+          <option value="Perempuan">Perempuan</option>
         </select>
         <label for="tempat">Tempat dilahirkan</label>
-        <select class="input" name="">
-          <option value="1">RS/RB</option>
-          <option value="2">Puskesmas</option>
-          <option value="3">Polindes</option>
-          <option value="4">Rumah</option>
-          <option value="5">Lainnya</option>
+        <select ng-model="tempat" id="tempat" class="input" name="">
+          <option value="RS/RB">RS/RB</option>
+          <option value="Puskesmas">Puskesmas</option>
+          <option value="Polindes">Polindes</option>
+          <option value="Rumah">Rumah</option>
+          <option value="Lainnya">Lainnya</option>
         </select>
+        <input id="tempatLain" type="text" class="input" placeholder="Tempat lain" name="" value="">
         <label for="tempatkel">Tempat kelahiran</label>
-        <input type="text" class="input" placeholder="Tempat kelahiran"/>
-        <label for="tglLahir">Hari dan Tanggal lahir</label>
-        <input type="text" class="input" placeholder="Hari/Tgl/Bulan/Tahun" name="" value="">
+        <input ng-model="tempatkel" type="text" id="tempatkel" class="input" placeholder="Tempat kelahiran"/>
+        <h5 id="tmpt_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Tempat kelahiran tidak boleh kosong</h5>
+        <label for="tglLahir">Tanggal lahir</label>
+        <input type="text" ng-model="tglLahir" id="tglLahir" data-field="date" class="input" placeholder="Tanggal Lahir" name="" value="">
+        <h5 id="tgl_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih tanggal</h5>
+        <div id="tanggal"></div>
         <label for="">Pukul</label>
-        <input type="text" class="input" placeholder="Pukul" name="" value="">
+        <input ng-model="jam" id="jam" type="text" data-field="time" class="input" placeholder="Pukul" name="" value="">
+        <h5 class="input-alert" id="jam_alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih jam</h5>
         <label for="">Jenis Kelahiran</label>
-        <select class="input" name="">
-          <option value="1">Tunggal</option>
-          <option value="2">Kembar 2</option>
-          <option value="3">Kembar 3</option>
-          <option value="4">Kembar 4</option>
-          <option value="5">Lainnya</option>
+        <select ng-model="jen_kelahiran" class="input" name="">
+          <option value="Tunggal">Tunggal</option>
+          <option value="Kembar 2">Kembar 2</option>
+          <option value="Kembar 3">Kembar 3</option>
+          <option value="Kembar 4">Kembar 4</option>
+          <option value="Lainnya">Lainnya</option>
         </select>
         <label for="">Kelahiran ke</label>
-        <select class="input" name="">
-          <option value="1">Pertama</option>
-          <option value="2">Kedua</option>
-          <option value="3">Ketiga</option>
-          <option value="4">Keempat</option>
-          <option value="...">...</option>
+        <select ng-model="kelahiran_ke" class="input" name="">
+          <option value="Pertama">Pertama</option>
+          <option value="Kedua">Kedua</option>
+          <option value="Ketiga">Ketiga</option>
+          <option value="Keempat">Keempat</option>
+          <option value="Lainnya">Lainnya</option>
         </select>
         <label for="">Penolong kelahiran</label>
-        <select class="input" name="">
-          <option value="1">Dokter</option>
-          <option value="2">Bidan/Perawat</option>
-          <option value="3">Dukun</option>
-          <option value="4">Lainnya</option>
+        <select ng-model="penolong_kelahiran" class="input" name="">
+          <option value="Dokter">Dokter</option>
+          <option value="Bidan/Perawat">Bidan/Perawat</option>
+          <option value="Dukun">Dukun</option>
+          <option value="Lainnya">Lainnya</option>
         </select>
         <label for="">Berat bayi</label>
-        <input type="number" class="input" placeholder="Berat bayi" name="" value="">
+        <div class="input-group">
+          <input ng-model="berat_bayi" id="berat" max="20" type="number" class="input" placeholder="Berat bayi" name="" value="">
+          <span class="input-addon">Kg</span>
+        </div>
         <label for="">Panjang bayi</label>
-        <input type="number" class="input" placeholder="Panjang bayi" name="" value="">
+        <div class="input-group">
+          <input ng-model="panjang_bayi" max="20" id="panjang" type="number" class="input" placeholder="Panjang bayi" name="" value="">
+          <span class="input-addon">Cm</span>
+        </div>
         <hr>
-        <button type="button" class="btn btn-prev" ng-click="next('')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Kembali</button>
-        <button type="button" class="btn btn-next" ng-click="next('halaman3')" name="button"><i class="fa fa-angle-right fa-lg"></i>&nbsp;Selanjutnya</button>
-        <code>2 / 7 halaman</code>
+        <button type="button" id="btn" class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
   </div>

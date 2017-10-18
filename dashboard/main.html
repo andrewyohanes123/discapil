@@ -1,0 +1,235 @@
+<div class="kotak">
+  <div class="head">
+    <p class="head-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Pencil</p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Nomor KK</th>
+        <th>Nama Bayi</th>
+        <th>Nama Ibu</th>
+        <th>Nama Ayah</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="list in daftar">
+        <!-- <td colspan="6"><center>Tidak ada pendaftaran</center></td> -->
+        <td>{{ daftar.indexOf(list) + 1 }}</td>
+        <td>{{ list.no_kk }}</td>
+        <td>{{ list.nama }}</td>
+        <td>{{ list.nama_ibu }}</td>
+        <td>{{ list.nama_ayah }}</td>
+        <td><button type="button" ng-click="detail(list.id_bayi)" class="btn btn-check" name="button">Detail</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="kotak-body">
+
+  </div>
+</div>
+<div id="modal" class="modal">
+  <div class="modal-window modal-wide">
+    <div class="modal-titlebar">
+      <span class="close">
+        <i class="fa fa-times fa-lg"></i>
+      </span>
+      <p class="title"><i class="fa fa-list fa-lg"></i>&nbsp;Detail</p>
+    </div>
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-6">
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Keluarga</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+              <table class="table">
+                <tr>
+                  <td>Nomor Kartu Keluarga</td>
+                  <td>{{ nomor_kk }}</td>
+                </tr>
+                <tr>
+                  <td>Nama Kepala Keluarga</td>
+                  <td>{{ nama_kepala_keluarga }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Ibu</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+            <table class="table">
+              <tr>
+                <td>NIK</td>
+                <td>{{ nik_ibu }}</td>
+              </tr>
+              <tr>
+                <td>Nama Ibu</td>
+                <td>{{ nama_ibu }}</td>
+              </tr>
+            </table>
+          </div>
+          </div>
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Ayah</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+            <table class="table">
+              <tr>
+                <td>NIK</td>
+                <td>{{ nik_ayah }}</td>
+              </tr>
+              <tr>
+                <td>Nama Ibu</td>
+                <td>{{ nama_ayah }}</td>
+              </tr>
+            </table>
+          </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Bayi</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+            <table class="table">
+              <tr>
+                <td>Nama Bayi</td>
+                <td>{{ nama_bayi }}</td>
+              </tr>
+              <tr>
+                <td>Jenis Kelamin</td>
+                <td>{{ jenis_kelamin }}</td>
+              </tr>
+              <tr>
+                <td>Tempat dilahirkan</td>
+                <td>{{ tempat_dilahirkan }}</td>
+              </tr>
+              <tr>
+                <td>Tempat kelahiran</td>
+                <td>{{ tempat_kelahiran }}</td>
+              </tr>
+              <tr>
+                <td>Tanggal lahir</td>
+                <td>{{ tanggal_lahir }}</td>
+              </tr>
+              <tr>
+                <td>Jam</td>
+                <td>{{ waktu_lahir }}</td>
+              </tr>
+              <tr>
+                <td>Jenis kelahiran</td>
+                <td>{{ jenis_kelahiran }}</td>
+              </tr>
+              <tr>
+                <td>Kelahiran ke</td>
+                <td>{{ kelahiran_ke }}</td>
+              </tr>
+              <tr>
+                <td>Penolong kelahiran</td>
+                <td>{{ penolong_kelahiran }}</td>
+              </tr>
+              <tr>
+                <td>Berat</td>
+                <td>{{ berat }}</td>
+              </tr>
+              <tr>
+                <td>Panjang</td>
+                <td>{{ panjang }}</td>
+              </tr>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Pelapor</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+              <table class="table">
+                <tr>
+                  <td>NIK</td>
+                  <td>{{ pelapor.nik }}</td>
+                </tr>
+                <tr>
+                  <td>Nama Pelapor</td>
+                  <td>{{ pelapor.nama }}</td>
+                </tr>
+                <tr>
+                  <td>Tanggal lahir</td>
+                  <td>{{ pelapor.tangal_lahir }}</td>
+                </tr>
+                <tr>
+                  <td>Jenis kelamin</td>
+                  <td>{{ pelapor.jenis_kelamin }}</td>
+                </tr>
+                <tr>
+                  <td>Alamat</td>
+                  <td>{{ pelapor.alamat }}</td>
+                </tr>
+                <tr>
+                  <td>Pekerjaan</td>
+                  <td>{{ pelapor.pekerjaan }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-4" ng-repeat="saksi2 in saksi">
+          <div class="collapse">
+            <div class="head">
+              <p><i class="fa fa-file fa-lg"></i>&nbsp;Saksi {{ saksi.indexOf(saksi2) + 1 }}</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+              <table class="table">
+                <tr>
+                  <td>NIK</td>
+                  <td>{{ saksi2.nik }}</td>
+                </tr>
+                <tr>
+                  <td>Nama Pelapor</td>
+                  <td>{{ saksi2.nama }}</td>
+                </tr>
+                <tr>
+                  <td>Tanggal lahir</td>
+                  <td>{{ saksi2.tangal_lahir }}</td>
+                </tr>
+                <tr>
+                  <td>Jenis kelamin</td>
+                  <td>{{ saksi2.jenis_kelamin }}</td>
+                </tr>
+                <tr>
+                  <td>Alamat</td>
+                  <td>{{ saksi2.alamat }}</td>
+                </tr>
+                <tr>
+                  <td>Pekerjaan</td>
+                  <td>{{ saksi2.pekerjaan }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-modal" name="button"><i class="fa fa-times-circle fa-lg"></i>&nbsp;Tutup</button>
+    </div>
+  </div>
+</div>
