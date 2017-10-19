@@ -2,21 +2,40 @@
   <div class="form-container">
     <div class="form-head">
       <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Data Ibu</p>
+      <div class="tabs">
+        <div id="dlmManado" class="tab click">
+          <a href="javascript:void(0);"><i class="fa fa-map-marker fa-lg"></i>&nbsp;Manado</a>
+        </div>
+        <div id="luarManado" class="tab">
+          <a href="javascript:void(0);"><i class="fa fa-map fa-lg"></i>&nbsp;Luar Manado</a>
+        </div>
+      </div>
     </div>
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
-        <label for="nik">NIK</label>
-        <div class="input-group">
-            <input type="number" class="input" ng-model="nik" id="nik" placeholder="NIK" name="" value="">
-            <span class="input-addon-btn">
-              <button type="button" class="btn btn-check" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
-            </span>
+        <div id="manado">
+          <label for="nik">NIK</label>
+          <div class="input-group">
+              <input type="number" class="input" ng-model="nik" id="nik" placeholder="NIK" name="" value="">
+              <span class="input-addon-btn">
+                <button type="button" class="btn btn-check" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+              </span>
+          </div>
+          <label for="">Nama lengkap</label>
+          <input type="text" class="input" ng-model="nama_ibu" id="nama_ibu" placeholder="Nama lengkap" name="" value="" readonly>
         </div>
-        <label for="">Nama lengkap</label>
-        <input type="text" class="input" ng-model="nama_ibu" id="nama_ibu" placeholder="Nama lengkap" name="" value="" readonly>
+        <div id="luar_manado">
+          <label for="">NIK</label>
+          <input type="number" class="input" id="nik_luar" placeholder="NIK" name="" value="">
+          <label for="">Nama Lengkap</label>
+          <input type="text" class="input" id="nama_lengkap" placeholder="Nama lengkap" name="" value="">
+        </div>
         <hr>
-        <button type="button" class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
+        <button type="submit" class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
   </div>
+</div>
+<div id="tanggal">
+
 </div>

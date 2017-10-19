@@ -2,20 +2,36 @@
   <div class="form-container">
     <div class="form-head">
       <p class="form-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Data Ayah</p>
+      <div class="tabs">
+        <div class="tab click" id="dlmManado">
+          <a href="javascript:void(0);"><i class="fa fa-map-marker fa-lg"></i>&nbsp;Manado</a>
+        </div>
+        <div class="tab" ng-show="orgManado" id="luarManado">
+          <a href="javascript:void(0);"><i class="fa fa-map fa-lg"></i>&nbsp;Luar Manado</a>
+        </div>
+      </div>
     </div>
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
-        <label for="nik">NIK</label>
-        <div class="input-group">
-          <input type="text" class="input" id="nik" ng-model="nik_ayah" placeholder="NIK">
-          <span class="input-addon-btn">
-            <button type="button" class="btn btn-check"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
-          </span>
+        <div id="manado">
+          <div class="input-group">
+            <input type="text" class="input" id="nik" ng-model="nik_ayah" placeholder="NIK">
+            <span class="input-addon-btn">
+              <button type="button" class="btn btn-check"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+            </span>
+          </div>
+          <label for="">Nama lengkap</label>
+          <input type="text" class="input" id="nama_ayah" placeholder="Nama lengkap" ng-model="nama_ayah" name="" value="" readonly>
         </div>
-        <label for="">Nama lengkap</label>
-        <input type="text" class="input" id="nama_ayah" placeholder="Nama lengkap" ng-model="nama_ayah" name="" value="" readonly>
+        <div id="luar_manado">
+          <label for="nik">NIK</label>
+          <input type="text" class="input" id="nik_ayah" ng-model="nik_luar" placeholder="NIK">
+          <label for="">Nama lengkap</label>
+          <input type="text" class="input" id="nama_lengkap" placeholder="Nama lengkap" ng-model="nama_lengkap" name="" value="">
+        </div>
         <hr>
         <button type="submit"  class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
+        <button type="button" ng-click="lewati()" class="btn btn-prev" name="button"><i class="fa fa-angle-double-right fa-lg"></i>&nbsp;Lewati</button>
       </form>
     </div>
   </div>

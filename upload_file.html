@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="capil">
   <head>
     <meta charset="utf-8">
     <title>Upload Dokumen</title>
@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="assets/css/font-awesome.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="assets/js/jquery.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-route.min.js" charset="utf-8"></script>
+    <script src="assets/js/angular-cookies.min.js" charset="utf-8"></script>
+    <script src="assets/js/ng-file-upload.min.js" charset="utf-8"></script>
+    <script src="assets/js/ng-file-upload-shim.min.js" charset="utf-8"></script>
     <script src="assets/js/main.js" charset="utf-8"></script>
   </head>
   <body>
@@ -23,20 +28,29 @@
     </nav>
     <div class="space">
     </div>
+    <div class="notifikasi">
+      <div class="notifikasi-icon">
+        <i class="fa fa-bell fa-lg"></i>
+      </div>
+      <div class="notifikasi-body">
+
+      </div>
+    </div>
     <br/>
-    <div class="row">
+    <div class="container">
       <div class="col-4"></div>
       <div class="col-4">
-        <div class="content">
-          <div class="content-head">
-            <p><i class="fa fa-upload fa-lg"></i>&nbsp;Upload dokumen</p>
+        <div class="kotak">
+          <div class="head">
+            <p class="head-title"><i class="fa fa-upload fa-lg"></i>&nbsp;Upload File</p>
           </div>
-          <hr>
-          <div class="container">
-            <label for="">File</label>
-            <input type="file" class="input" name="" value="">
-            <hr>
-            <button type="button" class="btn btn-next" name="button"><i class="fa fa-upload fa-lg"></i>&nbsp;Upload</button>
+          <div class="kotak-body" ng-controller="upload">
+            <form class="group" action="index.html" method="post">
+              <label for="">Nomor Pendaftaran</label>
+              <input type="number" ng-model="nomor_pendaftaran" class="input" placeholder="Masukkan nomor pendaftaran" name="" value="">
+              <hr>
+              <button type="submit" ng-click="cekNomor()" class="btn btn-next" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek nomor</button>
+            </form>
           </div>
         </div>
       </div>

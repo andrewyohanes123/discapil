@@ -1,6 +1,6 @@
 <div class="kotak">
   <div class="head">
-    <p class="head-title"><i class="fa fa-pencil fa-lg"></i>&nbsp;Pencil</p>
+    <p class="head-title"><i class="fa fa-list-alt fa-lg"></i>&nbsp;List Pendaftaran Akte Kelahiran</p>
   </div>
 
   <table class="table">
@@ -39,6 +39,7 @@
       <p class="title"><i class="fa fa-list fa-lg"></i>&nbsp;Detail</p>
     </div>
     <div class="modal-content">
+      <h4><i class="fa fa-list fa-lg"></i>&nbsp;Detail keluarga</h4>
       <div class="row">
         <div class="col-6">
           <div class="collapse">
@@ -61,7 +62,7 @@
           </div>
           <div class="collapse">
             <div class="head">
-              <p><i class="fa fa-file fa-lg"></i>&nbsp;Ibu</p>
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Ibu</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
@@ -79,7 +80,7 @@
           </div>
           <div class="collapse">
             <div class="head">
-              <p><i class="fa fa-file fa-lg"></i>&nbsp;Ayah</p>
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Ayah</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
@@ -89,7 +90,7 @@
                 <td>{{ nik_ayah }}</td>
               </tr>
               <tr>
-                <td>Nama Ibu</td>
+                <td>Nama Ayah</td>
                 <td>{{ nama_ayah }}</td>
               </tr>
             </table>
@@ -99,7 +100,7 @@
         <div class="col-6">
           <div class="collapse">
             <div class="head">
-              <p><i class="fa fa-file fa-lg"></i>&nbsp;Bayi</p>
+              <p><i class="fa fa-h-square fa-lg"></i>&nbsp;Bayi</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
@@ -157,7 +158,7 @@
         <div class="col-4">
           <div class="collapse">
             <div class="head">
-              <p><i class="fa fa-file fa-lg"></i>&nbsp;Pelapor</p>
+              <p><i class="fa fa-user-o fa-lg"></i>&nbsp;Pelapor</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
@@ -193,7 +194,7 @@
         <div class="col-4" ng-repeat="saksi2 in saksi">
           <div class="collapse">
             <div class="head">
-              <p><i class="fa fa-file fa-lg"></i>&nbsp;Saksi {{ saksi.indexOf(saksi2) + 1 }}</p>
+              <p><i class="fa fa-user-circle-o fa-lg"></i>&nbsp;Saksi {{ saksi.indexOf(saksi2) + 1 }}</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
@@ -225,6 +226,60 @@
               </table>
             </div>
           </div>
+        </div>
+      </div>
+      <hr>
+      <h4><i class="fa fa-file-archive-o fa-lg"></i>&nbsp;Berkas yang sudah dimasukkan</h4>
+      <div class="collapse">
+        <div class="head">
+          <p><i class="fa fa-file-archive-o fa-lg"></i>&nbsp;Berkas</p>
+          <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+        </div>
+        <div class="containers">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Surat keterangan kelahiran</td>
+                <td><a href="{{ surat_ket_kelahiran_link }}" target="_blank">{{ surat_ket_kelahiran }}</a></td>
+              </tr>
+              <tr>
+                <td>Fotocopy KTP Ayah</td>
+                <td><a href="{{ ktp_ayah_link }}" target="_blank">{{ ktp_ayah }}</a></td>
+              </tr>
+              <tr>
+                <td>Fotocopy KTP Ibu</td>
+                <td><a href="{{ ktp_ibu_link }}" target="_blank">{{ ktp_ibu }}</a></td>
+              </tr>
+              <tr>
+                <td>Fotocopy KTP Saksi 1</td>
+                <td><a href="{{ ktp_saksi1_link }}" target="_blank">{{ ktp_saksi1 }}</a></td>
+              </tr>
+              <tr>
+                <td>Fotocopy KTP Saksi 2</td>
+                <td><a href="{{ ktp_saksi2_link }}" target="_blank">{{ ktp_saksi2 }}</a></td>
+              </tr>
+              <tr>
+                <td>Berita acara kepolisian</td>
+                <td><a href="{{ berita_acara_link }}">{{ berita_acara }}</a></td>
+              </tr>
+              <tr>
+                <td>Kartu Keluarga</td>
+                <td><a href="{{ kk_link }}" target="_blank" ng-disabled="kk == null">{{ kk }}</a></td>
+              </tr>
+              <tr>
+                <td>Akte perkawinan</td>
+                <td><a href="{{ akte_perkawinan_link }}">{{ akte_perkawinan }}</a></td>
+              </tr>
+              <tr>
+                <td>Akte kelahiran ibu</td>
+                <td><a href="{{ akte_kelahiran_ibu_link }}" target="_blank">{{ akte_kelahiran_ibu }}</a></td>
+              </tr>
+              <tr>
+                <td>Surat pernyataan belum menikah</td>
+                <td><a href="{{ surat_pernyataan_belum_nikah_link }}" target="_blank">{{ surat_pernyataan_belum_nikah }}</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

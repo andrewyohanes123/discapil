@@ -1,4 +1,4 @@
-var app = angular.module('capil', ['ngRoute', 'ngCookies']);
+var app = angular.module('capil', ['ngRoute', 'ngCookies', 'ngFileUpload']);
 var dash = angular.module('dash', ['ngRoute', 'ngCookies']);
 var baseUrl = window.location.origin + "/form_capil/pendaftaran.html";
 var backendUrl = window.location.origin + "/capil_dev/akte_lahir/api"
@@ -42,6 +42,112 @@ dash.controller('listPendaftaran', function($scope, $http){
       $scope.nama_ayah = hasil.nama_ayah;
       $scope.pelapor = hasil.pelapor;
       $scope.saksi = hasil.saksi;
+
+      var berkas = resp.data.data;
+      var status = resp.data.status;
+      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
+      if (status)
+      {
+        if (berkas.berkas_akta_perkawinan == null)
+        {
+          $scope.akte_perkawinan = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_perkawinan_link = linkFile + berkas.berkas_akta_perkawinan;
+          $scope.akte_perkawinan = berkas.berkas_akta_perkawinan;
+        }
+
+        if (berkas.berkas_akte_kelahiran_ibu == null)
+        {
+          $scope.akte_kelahiran_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_kelahiran_ibu = berkas.berkas_akte_kelahiran_ibu;
+          $scope.akte_kelahiran_ibu_link = linkFile + berkas.berkas_akte_kelahiran_ibu;
+        }
+
+        if (berkas.berkas_berita_acara_kepolisian == null)
+        {
+          $scope.berita_acara = "Belum upload";
+        }
+        else
+        {
+          $scope.berita_acara = berkas.berkas_berita_acara_kepolisian;
+          $scope.berita_acara_link = linkFile + berkas.berkas_berita_acara_kepolisian;
+        }
+
+        if (berkas.berkas_kk == null)
+        {
+          $scope.kk = "Belum upload";
+        }
+        else
+        {
+          $scope.kk = berkas.berkas_kk;
+          $scope.kk_link = linkFile + berkas.berkas_kk;
+        }
+
+        if (berkas.berkas_ktp_ayah == null )
+        {
+          $scope.ktp_ayah = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ayah_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ayah = berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_ibu == null )
+        {
+          $scope.ktp_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ibu_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ibu =  berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_saksi1 == null)
+        {
+          $scope.ktp_saksi1 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi1 = berkas.berkas_ktp_saksi1;
+          $scope.ktp_saksi1_link = linkFile + berkas.berkas_ktp_saksi1;
+        }
+
+        if (berkas.berkas_ktp_saksi2 == null)
+        {
+          $scope.ktp_saksi2 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi2_link = linkFile + berkas.berkas_ktp_saksi2;
+          $scope.ktp_saksi2 = berkas.berkas_ktp_saksi2;
+        }
+
+        if (berkas.berkas_surat_ket_kelahiran == null)
+        {
+          $scope.surat_ket_kelahiran = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_ket_kelahiran = berkas.berkas_surat_ket_kelahiran;
+          $scope.surat_ket_kelahiran_link = linkFile + berkas.berkas_surat_ket_kelahiran;
+        }
+
+        if (berkas.berkas_surat_pernyataan_belum_catat_kawin_ibu == null)
+        {
+          $scope.surat_pernyataan_belum_nikah = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_pernyataan_belum_nikah_link = linkFile + berkas.surat_pernyataan_belum_nikah;
+          $scope.surat_pernyataan_belum_nikah = berkas.surat_pernyataan_belum_nikah;
+        }
+      }
     });
 
     $('.modal').show();
@@ -101,6 +207,170 @@ app.config(function($routeProvider){
     templateUrl : "persetujuan.html",
     controller : "persetujuan"
   })
+});
+
+app.controller('upload', function($scope, data, $cookieStore, $http, Upload){
+  $scope.cekNomor = function() {
+    $http.get(backendUrl + "/ambil_berkas/" + $scope.nomor_pendaftaran).then(function(resp){
+      var hasil = resp.data.data;
+      var status = resp.data.status;
+      if (status)
+      {
+        $cookieStore.put('nomor_pendaftaran', $scope.nomor_pendaftaran);
+      }
+      else
+      {
+        var msg = resp.data.message;
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').empty();
+        $('.notifikasi-body').text(msg);
+        setTimeout(function(){
+          $('.notifikasi').hide();
+        },3000);
+      }
+    });
+  }
+
+  $scope.upload = function(file, nama_field)
+  {
+    var nomor = $cookieStore.get('nomor_pendaftaran')
+    Upload.upload({
+      url : backendUrl + "/upload_berkas",
+      data : { no_antrian : nomor, file : file, nama_field_berkas : nama_field}
+    }).then(function(resp){
+      var status = resp.data.status;
+      if (status)
+      {
+        $scope.getList();
+      }
+    })
+  }
+
+  $scope.onFileSelect = function(file)
+  {
+    if (!file) return;
+    Upload.upload({
+      url : backendUrl + "/upload_berkas",
+      data : { file: file}
+    }).then(function(resp){
+      console.log(resp);
+    })
+  }
+
+  $scope.getList = function()
+  {
+    var nomor = $cookieStore.get('nomor_pendaftaran');
+    $http.get(backendUrl + "/ambil_berkas/" + nomor).then(function(resp){
+      var berkas = resp.data.data;
+      var status = resp.data.status;
+      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
+      // console.log(nomor);
+      if (status)
+      {
+        if (berkas.berkas_akta_perkawinan == null)
+        {
+          $scope.akte_perkawinan = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_perkawinan_link = linkFile + berkas.berkas_akta_perkawinan;
+          $scope.akte_perkawinan = berkas.berkas_akta_perkawinan;
+        }
+
+        if (berkas.berkas_akte_kelahiran_ibu == null)
+        {
+          $scope.akte_kelahiran_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_kelahiran_ibu = berkas.berkas_akte_kelahiran_ibu;
+          $scope.akte_kelahiran_ibu_link = linkFile + berkas.berkas_akte_kelahiran_ibu;
+        }
+
+        if (berkas.berkas_berita_acara_kepolisian == null)
+        {
+          $scope.berita_acara = "Belum upload";
+        }
+        else
+        {
+          $scope.berita_acara = berkas.berkas_berita_acara_kepolisian;
+          $scope.berita_acara_link = linkFile + berkas.berkas_berita_acara_kepolisian;
+        }
+
+        if (berkas.berkas_kk == null)
+        {
+          $scope.kk = "Belum upload";
+        }
+        else
+        {
+          $scope.kk = berkas.berkas_kk;
+          $scope.kk_link = linkFile + berkas.berkas_kk;
+        }
+
+        if (berkas.berkas_ktp_ayah == null )
+        {
+          $scope.ktp_ayah = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ayah_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ayah = berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_ibu == null )
+        {
+          $scope.ktp_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ibu_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ibu =  berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_saksi1 == null)
+        {
+          $scope.ktp_saksi1 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi1 = berkas.berkas_ktp_saksi1;
+          $scope.ktp_saksi1_link = linkFile + berkas.berkas_ktp_saksi1;
+        }
+
+        if (berkas.berkas_ktp_saksi2 == null)
+        {
+          $scope.ktp_saksi2 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi2_link = linkFile + berkas.berkas_ktp_saksi2;
+          $scope.ktp_saksi2 = berkas.berkas_ktp_saksi2;
+        }
+
+        if (berkas.berkas_surat_ket_kelahiran == null)
+        {
+          $scope.surat_ket_kelahiran = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_ket_kelahiran = berkas.berkas_surat_ket_kelahiran;
+          $scope.surat_ket_kelahiran_link = linkFile + berkas.berkas_surat_ket_kelahiran;
+        }
+
+        if (berkas.berkas_surat_pernyataan_belum_catat_kawin_ibu == null)
+        {
+          $scope.surat_pernyataan_belum_nikah = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_pernyataan_belum_nikah_link = linkFile + berkas.surat_pernyataan_belum_nikah;
+          $scope.surat_pernyataan_belum_nikah = berkas.surat_pernyataan_belum_nikah;
+        }
+      }
+    })
+  }
+
+  $scope.getList();
 });
 
 app.controller('persetujuan', function($scope, data, $cookieStore, $http){
@@ -280,7 +550,7 @@ app.controller('saksi2', function($scope, data, $cookieStore, $http){
         $('#nik').removeClass('input-error');
         $('#nik').addClass('input-success');
         $('#nama').addClass('input-success');
-        $scope.nama = val.nama;
+        $scope.nama = val.NAMA_LGKP;
       }
       else
       {
@@ -481,8 +751,7 @@ app.controller('saksi1', function($scope, data, $cookieStore, $http){
         $('#nik').removeClass('input-error');
         $('#nik').addClass('input-success');
         $('#nama').addClass('input-success');
-        console.log(val.nama);
-        $scope.nama = val.nama;
+        $scope.nama = val.NAMA_LGKP;
       }
       else
       {
@@ -568,7 +837,7 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookieStore, $htt
         $('#nik').removeClass('input-error');
         $('#nik').addClass('input-success');
         $('#nama').addClass('input-success');
-        $scope.nama_pelapor = val.nama;
+        $scope.nama_pelapor = val.NAMA_LGKP;
       }
       else
       {
@@ -748,7 +1017,7 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookieStore, $htt
       {
         $cookieStore.put('plr_nik', $scope.nik_pelapor);
         $cookieStore.put('plr_nama', $scope.nama);
-        $cookieStore.put('plr_tanggal_lahir', $scope.tanggal_lahir);
+        $cookieStore.put('plr_tanggal_lahir', moment($scope.tanggal_lahir).format('YYYY-MM-DD'));
         $cookieStore.put('plr_jenis_kelamin', $scope.jen_kelamin);
         $cookieStore.put('plr_pekerjaan', $scope.pekerjaan);
         $cookieStore.put('plr_alamat', $scope.alamat);
@@ -761,6 +1030,7 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookieStore, $htt
 
 app.controller('ayah', function($scope, data, $cookieStore, $http){
   var data = data.getOrang();
+  $scope.orgManado = $cookieStore.get('ibu_org_manado');
   $('#nik').on('blur', function(){
     var nik = $(this).val();
     $http.get(backendUrl + '/ambil_penduduk/' + nik).then(function(resp){
@@ -789,46 +1059,116 @@ app.controller('ayah', function($scope, data, $cookieStore, $http){
     });
   });
 
+  $scope.lewati = function() {
+    window.location.replace('pendaftaran.html#!/halaman5');
+  }
+
+  $('#nik_ayah').on('keyup', function(){
+    var ini = $(this).val();
+    if (ini.length < 1)
+    {
+      $(this).removeClass('input-success');
+      $(this).addClass('input-error');
+    }
+    else if (ini.length > 1)
+    {
+      $(this).removeClass('input-error');
+      $(this).addClass('input-success')
+    }
+  })
+
+  $('#nama_lengkap').on('keyup', function(){
+    var ini = $(this).val();
+    if (ini.length < 1)
+    {
+      $(this).removeClass('input-success');
+      $(this).addClass('input-error');
+    }
+    else if (ini.length > 1)
+    {
+      $(this).removeClass('input-error');
+      $(this).addClass('input-success')
+    }
+  })
+
   $('.btn-next').click(function(){
     var nik = $('#nik').val();
     var nama = $('#nama_ayah').val();
-    if (nik == '' || nik == null)
+    var tab = $('#manado').css('display');
+    if (tab == 'block')
     {
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').text('Masukkan NIK');
-      setTimeout(function(){
-        $('.notifikasi').css('display', 'none');
-      }, 3000);
-      $('#nik').addClass('input-error');
-      $('#nik').focus();
-    }
-    else if (nama == '' || nama == null)
-    {
-      $('#nik').addClass('input-error');
-      $('#nik').focus();
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').text('NIK tidak valid');
-      setTimeout(function(){
-        $('.notifikasi').css('display', 'none');
-      }, 3000);
+      if (nik == '' || nik == null)
+      {
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan NIK');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+        $('#nik').addClass('input-error');
+        $('#nik').focus();
+      }
+      else if (nama == '' || nama == null)
+      {
+        $('#nik').addClass('input-error');
+        $('#nik').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('NIK tidak valid');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else
+      {
+        $cookieStore.put('nik_ayah', $scope.nik_ayah);
+        $cookieStore.put('nama_ayah', $scope.nama_ayah);
+        window.location.replace("pendaftaran.html#!/halaman5")
+      }
     }
     else
     {
-      $cookieStore.put('nik_ayah', $scope.nik_ayah);
-      $cookieStore.put('nama_ayah', $scope.nama_ayah);
-      window.location.replace("pendaftaran.html#!/halaman5")
+      var nik = $('#nik_ayah').val();
+      var nama = $('#nama_lengkap').val();
+      if (nik == '' || nik == null)
+      {
+        $('#nik_ayah').addClass('input-error');
+        $('#nik_ayah').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan NIK');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else if (nama == '' || nama == null)
+      {
+        $('#nama_lengkap').addClass('input-error');
+        $('#nama_lengkap').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan nama lengkap');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else
+      {
+        $cookieStore.put('nik_ayah', $scope.nik_luar);
+        $cookieStore.put('nama_ayah', $scope.nama_lengkap);
+        window.location.replace("pendaftaran.html#!/halaman5")
+      }
     }
   });
 });
 
 app.controller('ibu', function($scope, data, $cookieStore, $http){
+  $('#tanggal').DateTimePicker(data.datepickerSetting());
   $('#nik').on('blur', function(){
     var nik = $(this).val();
     $http.get(backendUrl + '/ambil_penduduk/' + nik).then(function(resp){
       var val = resp.data.data;
-      if (val.jenis_kelamin == '1')
+      if (val.JENIS_KLMIN == '1')
       {
         $('.notifikasi').css('display', 'flex');
         $('.notifikasi-body').empty();
@@ -842,7 +1182,7 @@ app.controller('ibu', function($scope, data, $cookieStore, $http){
         $('#nik').removeClass('input-error');
         $('#nik').addClass('input-success');
         $('#nama_ibu').addClass('input-success');
-        $scope.nama_ibu = val.nama;
+        $scope.nama_ibu = val.NAMA_LGKP;
       }
       else
       {
@@ -852,36 +1192,102 @@ app.controller('ibu', function($scope, data, $cookieStore, $http){
     });
   });
 
-  $('.btn-next').click(function(){
-    var nik = $('#nik').val();
-    var nama = $('#nama_ibu').val();
-
-    if (nik == '' || nik == null)
+  $('#nik_luar').on('keyup', function(){
+    var ini = $(this).val();
+    if (ini == '' || ini == null)
     {
-      $('#nik').addClass('input-error');
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').text('Masukkan NIK');
-      setTimeout(function(){
-        $('.notifikasi').css('display', 'none');
-      }, 3000);
-    }
-    else if (nama == '' || nama == null)
-    {
-      $('#nama_ibu').addClass('input-error');
-      $('#nik').focus();
-      $('.notifikasi-body').empty();
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').text('NIK tidak valid');
-      setTimeout(function(){
-        $('.notifikasi').css('display', 'none');
-      }, 3000);
+      $(this).removeClass('input-success');
+      $(this).addClass('input-error');
     }
     else
     {
-      $cookieStore.put('nik_ibu', $scope.nik);
-      $cookieStore.put('nama_ibu', $scope.nama_ibu);
-      window.location.replace("pendaftaran.html#!/halaman4");
+      $(this).removeClass('input-error');
+      $(this).addClass('input-success');
+    }
+  });
+
+  $('#nama_lengkap').on('keyup', function(){
+    var ini = $(this).val();
+    if (ini == '' || ini == null)
+    {
+      $(this).removeClass('input-success');
+      $(this).addClass('input-error');
+    }
+    else
+    {
+      $(this).removeClass('input-error');
+      $(this).addClass('input-success');
+    }
+  });
+
+  $('.btn-next').click(function(){
+    var nik = $('#nik').val();
+    var nama = $('#nama_ibu').val();
+    var tab = $('#manado').css('display');
+    if (tab == 'block')
+    {
+      if (nik == '' || nik == null)
+      {
+        $('#nik').addClass('input-error');
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan NIK!');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else if (nama == '' || nama == null)
+      {
+        $('#nama_ibu').addClass('input-error');
+        $('#nik').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('NIK tidak valid');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else
+      {
+        $cookieStore.put('nik_ibu', $scope.nik);
+        $cookieStore.put('nama_ibu', $scope.nama_ibu);
+        $cookieStore.put('ibu_org_manado', 1)
+        window.location.replace("pendaftaran.html#!/halaman4");
+      }
+    }
+    else
+    {
+      var nik = $('#nik_luar').val();
+      var nama = $('#nama_lengkap').val();
+      if (nik == '' || nik == null)
+      {
+        $('#nik_luar').addClass('input-error');
+        $('#nik_luar').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan NIK');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else if (nama == '' || nama == null)
+      {
+        $('#nama_lengkap').addClass('input-error');
+        $('#nama_lengkap').focus();
+        $('.notifikasi-body').empty();
+        $('.notifikasi').css('display', 'flex');
+        $('.notifikasi-body').text('Masukkan nama lengkap');
+        setTimeout(function(){
+          $('.notifikasi').css('display', 'none');
+        }, 3000);
+      }
+      else
+      {
+        $cookieStore.put('nik_ibu', nik);
+        $cookieStore.put('nama_ibu', nama);
+        $cookieStore.put('ibu_org_manado', 0);
+        window.location.replace("pendaftaran.html#!/halaman4");
+      }
     }
   })
 
@@ -891,10 +1297,10 @@ app.controller('no_kk', function($scope, data, $cookieStore, $http){
   var orang = data.getOrang();
   $('#no_kk').on('blur', function(){
     $http.get(backendUrl + '/ambil_keluarga/' + $scope.nomor_kk).then(function(resp){
-      var val = resp.data.data;
+      var val = resp.data.data.kepala_keluarga;
       if (val != null)
       {
-        $scope.nama_kk = val.nama_kepemilikan;
+        $scope.nama_kk = val.NAMA_LGKP;
         $('#no_kk').removeClass('input-error');
         $('#no_kk').addClass('input-success');
         $('#nama_kk').addClass('input-success');
@@ -1139,7 +1545,7 @@ app.controller('bayi', function($scope, data, $cookieStore){
       window.location.replace(baseUrl + "#!/halaman3");
     }
   });
-  $scope.jen_kel = 'Laki - laki';
+  $scope.jen_kel = 'Laki-laki';
   $scope.tempat = 'RS/RB';
   $scope.jen_kelahiran = "Tunggal";
   $scope.kelahiran_ke = "Pertama";
