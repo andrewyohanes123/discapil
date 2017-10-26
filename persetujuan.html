@@ -20,18 +20,17 @@
 <div id="modal" class="modal">
   <div class="modal-window">
     <div class="modal-titlebar">
-      <span class="close"><i class="fa fa-times fa-lg"></i></span>
       <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran berhasil</p>
     </div>
-    <div class="modal-content">
-      <h2><i class="fa fa-info-circle fa-lg"></i>&nbsp;Nomor pendaftaran Anda :</h2>
-      <h1 class="nomor-daftar">{{ nomor_daftar }}</h1>
+    <div id="nomor_pendaftaran" class="modal-content">
+      <h1 class="pendaftaran-berhasil">Pendaftaran berhasil</h1>
+      <h4 class="pendaftaran-berhasil">Nomor pendaftaran anda :</h4>
+      <h1 class="nomor-pendaftaran">{{ nomor_daftar }}</h1>
       <hr>
-      <button type="button" class="btn btn-prev" name="button"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
-      <a href="#" class="btn btn-next"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a>
+      <button type="button" class="btn btn-prev" onclick="printJS('nomor_pendaftaran', 'html')" name="button"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
+      <a href="index.html" class="home-btn"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-modal" name="button"><i class="fa fa-times-circle fa-lg"></i>&nbsp;Tutup</button>
     </div>
   </div>
 </div>
