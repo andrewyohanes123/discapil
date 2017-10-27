@@ -2,6 +2,7 @@ var app = angular.module('capil', ['ngRoute', 'ngCookies', 'ngFileUpload']);
 var dash = angular.module('dash', ['ngRoute', 'ngCookies']);
 var baseUrl = window.location.origin + "/form_capil/pendaftaran.html";
 var backendUrl = window.location.origin + "/capil_dev/akte_lahir/api"
+var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
 
 // Dashboard
 dash.config(function($routeProvider){
@@ -172,13 +173,16 @@ dash.controller('user', function($scope, $http){
 
   $('#limit').change(function(){
     var ini = $(this).val();
-    $scope.get(ini, $scope.offset)
+    var cari = $('#nama').val();
+    $scope.get(ini, $scope.offset, cari)
   });
 
   $('#nama').keyup(function(){
     var ini = $(this).val();
     $scope.get($('#limit').val(), $scope.offset, ini);
   });
+
+  $('')
 
   // console.log($scope.blokir);
 
@@ -423,7 +427,6 @@ dash.controller('verif', function($scope, $http){
 
       var berkas = resp.data.data;
       var status = resp.data.status;
-      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
       if (status)
       {
         if (berkas.berkas_akta_perkawinan == null)
@@ -734,7 +737,6 @@ dash.controller('blm_verif', function($scope, $http){
 
       var berkas = resp.data.data;
       var status = resp.data.status;
-      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
       if (status)
       {
         if (berkas.berkas_akta_perkawinan == null)
@@ -1059,7 +1061,6 @@ dash.controller('listPendaftaran', function($scope, $http){
 
       var berkas = resp.data.data;
       var status = resp.data.status;
-      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
       if (status)
       {
         if (berkas.berkas_akta_perkawinan == null)
@@ -1319,7 +1320,6 @@ app.controller('upload', function($scope, data, $cookieStore, $http, Upload){
     $http.get(backendUrl + "/ambil_berkas/" + nomor).then(function(resp){
       var berkas = resp.data.data;
       var status = resp.data.status;
-      var linkFile = window.location.origin + "/capil_dev/akte_lahir/assets/berkas/";
       // console.log(nomor);
       if (status)
       {
