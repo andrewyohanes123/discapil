@@ -78,7 +78,8 @@
     var setting = $.extend({
       img_width : "50%",
       keyboardDetect : true,
-      backgroundClick : true
+      backgroundClick : true,
+      key : 27
     }, config)
     if (src != "")
     {
@@ -109,6 +110,30 @@
               $('.img-content').toggleClass('img-width');
             });
             return false;
+          })
+        }
+        else if (setting.keyboardDetect)
+        {
+          $(document).on('keyup', function(e){
+            var modal = $('.img-modal').css('display');
+            if (modal == 'block');
+            {
+              if (e.keyCode == setting.key)
+              {
+                $('.img-modal').click(function(){
+                  $('.img-content').css('animation', 'img-modal-out 750ms forwards');
+                  setTimeout(function(){
+                    $('.img-modal').fadeOut();
+                  }, 800);
+                  $('body').css('overflow', 'auto');
+                }).children().click(function(){
+                  $('.img-content').click(function(){
+                    $('.img-content').toggleClass('img-width');
+                  });
+                  return false;
+                })
+              }
+            }
           })
         }
       }

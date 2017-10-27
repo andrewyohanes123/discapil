@@ -25,7 +25,7 @@ dash.config(function($routeProvider){
     controller : 'user'
   })
   .otherwise({
-    redirectTo : "/" 
+    redirectTo : "/"
   })
 });
 
@@ -177,7 +177,7 @@ dash.controller('user', function($scope, $http){
 
   $('#nama').keyup(function(){
     var ini = $(this).val();
-    $scope.get($('#limit'), $scope.offset, ini)
+    $scope.get($('#limit').val(), $scope.offset, ini);
   });
 
   // console.log($scope.blokir);

@@ -53,7 +53,7 @@
           <tr ng-show="totalData == 0">
             <td colspan="5" style="font-weight: 500;"><center>Pengguna</center></td>
           </tr>
-          <tr ng-repeat="user in pengguna">
+          <tr ng-show="totalData > 0"  ng-repeat="user in pengguna">
             <td>{{ pengguna.indexOf(user) +1 }}</td>
             <td>{{ user.nama }}</td>
             <td>{{ user.username }}</td>
