@@ -2649,5 +2649,5 @@ $(document).ready(function(){
 
   $('.btn-collapse').click(function(){
     $('.menu li').not('.menu li:first-child').slideToggle();
-  })
+  });
 });
