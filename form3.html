@@ -18,7 +18,7 @@
           <div class="input-group">
               <input type="number" class="input" ng-model="nik" id="nik" placeholder="NIK" name="" value="">
               <span class="input-addon-btn">
-                <button type="button" class="btn btn-check" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+                <button type="button" class="btn btn-check" ng-click="cek()" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
               </span>
           </div>
           <label for="">Nama lengkap</label>
@@ -31,7 +31,8 @@
           <input type="text" class="input" id="nama_lengkap" placeholder="Nama lengkap" name="" value="">
         </div>
         <hr>
-        <button type="submit" class="btn btn-next" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
+        <button type="button" class="btn btn-prev" onclick="window.location.replace('#!/halaman2')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Kembali</button>
+        <button type="submit" class="btn btn-next" ng-click="cek()" name="button"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
   </div>

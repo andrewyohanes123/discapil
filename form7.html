@@ -18,7 +18,7 @@
           <div class="input-group">
             <input type="number" ng-model="nik" id="nik" class="input" placeholder="NIK" name="" value="">
             <span class="input-addon-btn">
-              <button type="button" class="btn btn-check"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+              <button type="button" class="btn btn-check" ng-click="cek()"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
             </span>
           </div>
           <h5 class="input-alert" id="nik_alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Masukkan NIK</h5>
@@ -43,6 +43,7 @@
           <input type="text" class="input" placeholder="Alamat Lengkap" id="alamat" ng-model="alamat" name="" value="">
         </div>
         <hr>
+        <button type="button" class="btn btn-prev" onclick="window.location.replace('#!/halaman5')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Kembali</button>
         <button type="submit" class="btn btn-next" name="button"><i class="fa fa-save fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
