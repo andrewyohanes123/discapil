@@ -1429,7 +1429,7 @@ app.controller('upload', function($scope, data, $cookieStore, $http, Upload){
   $scope.getList();
 });
 
-app.controller('persetujuan', function($scope, data, $cookies, $http){
+app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
   $('#nomor_telp').on('keyup', function(){
     var no_telp = $(this).val()
     if (no_telp == "" || no_telp == null)
@@ -1458,6 +1458,140 @@ app.controller('persetujuan', function($scope, data, $cookies, $http){
       $(this).addClass('input-success');
     }
   });
+
+  $scope.upload = function(file, nama_field)
+  {
+    var nomor = $cookies.get('nomor_pendaftaran')
+    Upload.upload({
+      url : backendUrl + "/upload_berkas",
+      data : { no_antrian : nomor, file : file, nama_field_berkas : nama_field}
+    }).then(function(resp){
+      var status = resp.data.status;
+      if (status)
+      {
+        $scope.getList();
+      }
+    })
+  }
+
+  $('a.ng-binding').click(function(){
+    var src = $(this).attr('href');
+    console.log(src);
+    $('.img-modal').imgModal(src);
+    return false;
+  })
+
+  $scope.getList = function()
+  {
+    var nomor = $cookies.get('nomor_pendaftaran');
+    $http.get(backendUrl + "/ambil_berkas/" + nomor).then(function(resp){
+      var berkas = resp.data.data;
+      var status = resp.data.status;
+      // console.log(nomor);
+      if (status)
+      {
+        if (berkas.berkas_akta_perkawinan == null)
+        {
+          $scope.akte_perkawinan = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_perkawinan_link = linkFile + berkas.berkas_akta_perkawinan;
+          $scope.akte_perkawinan = berkas.berkas_akta_perkawinan;
+        }
+
+        if (berkas.berkas_akte_kelahiran_ibu == null)
+        {
+          $scope.akte_kelahiran_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.akte_kelahiran_ibu = berkas.berkas_akte_kelahiran_ibu;
+          $scope.akte_kelahiran_ibu_link = linkFile + berkas.berkas_akte_kelahiran_ibu;
+        }
+
+        if (berkas.berkas_berita_acara_kepolisian == null)
+        {
+          $scope.berita_acara = "Belum upload";
+        }
+        else
+        {
+          $scope.berita_acara = berkas.berkas_berita_acara_kepolisian;
+          $scope.berita_acara_link = linkFile + berkas.berkas_berita_acara_kepolisian;
+        }
+
+        if (berkas.berkas_kk == null)
+        {
+          $scope.kk = "Belum upload";
+        }
+        else
+        {
+          $scope.kk = berkas.berkas_kk;
+          $scope.kk_link = linkFile + berkas.berkas_kk;
+        }
+
+        if (berkas.berkas_ktp_ayah == null )
+        {
+          $scope.ktp_ayah = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ayah_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ayah = berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_ibu == null )
+        {
+          $scope.ktp_ibu = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_ibu_link = linkFile + berkas.berkas_ktp_ayah;
+          $scope.ktp_ibu =  berkas.berkas_ktp_ayah;
+        }
+
+        if (berkas.berkas_ktp_saksi1 == null)
+        {
+          $scope.ktp_saksi1 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi1 = berkas.berkas_ktp_saksi1;
+          $scope.ktp_saksi1_link = linkFile + berkas.berkas_ktp_saksi1;
+        }
+
+        if (berkas.berkas_ktp_saksi2 == null)
+        {
+          $scope.ktp_saksi2 = "Belum upload";
+        }
+        else
+        {
+          $scope.ktp_saksi2_link = linkFile + berkas.berkas_ktp_saksi2;
+          $scope.ktp_saksi2 = berkas.berkas_ktp_saksi2;
+        }
+
+        if (berkas.berkas_surat_ket_kelahiran == null)
+        {
+          $scope.surat_ket_kelahiran = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_ket_kelahiran = berkas.berkas_surat_ket_kelahiran;
+          $scope.surat_ket_kelahiran_link = linkFile + berkas.berkas_surat_ket_kelahiran;
+        }
+
+        if (berkas.berkas_surat_pernyataan_belum_catat_kawin_ibu == null)
+        {
+          $scope.surat_pernyataan_belum_nikah = "Belum upload";
+        }
+        else
+        {
+          $scope.surat_pernyataan_belum_nikah_link = linkFile + berkas.surat_pernyataan_belum_nikah;
+          $scope.surat_pernyataan_belum_nikah = berkas.surat_pernyataan_belum_nikah;
+        }
+      }
+    })
+  }
 
   $('.btn-next').click(function(){
     // if ()
@@ -1500,6 +1634,8 @@ app.controller('persetujuan', function($scope, data, $cookies, $http){
       else if (status)
       {
         $scope.nomor_daftar = nomor_daftar;
+        $cookies.put('nomor_pendaftaran', nomor_daftar);
+        $scope.getList();
         $('#modal').modalPopup('show', {
           keyboardDetect : false,
           backgroundClick : false

@@ -18,7 +18,7 @@
   </div>
 </div>
 <div id="modal" class="modal">
-  <div class="modal-window">
+  <div class="modal-window modal-wide">
     <div class="modal-titlebar">
       <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran berhasil</p>
     </div>
@@ -29,10 +29,105 @@
       <hr>
       <button type="button" class="btn btn-prev" onclick="printJS('nomor_pendaftaran', 'html')" name="button"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
       <a href="index.html" class="home-btn"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a>
+      <h4><i class="fa fa-upload fa-lg"></i>&nbsp;File upload</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nama berkas</th>
+            <th>File</th>
+            <th>Upload</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Surat keterangan kelahiran</td>
+            <td><a href="{{ surat_ket_kelahiran_link }}" target="_blank">{{ surat_ket_kelahiran }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="surat_keterangan_kelahiran"  accept="image/*" ngf-pattern="'image/*'" name="" value="">
+              <button type="button" class="btn btn-check" ng-click="upload(surat_keterangan_kelahiran, 'berkas_surat_ket_kelahiran')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Fotocopy KTP Ayah</td>
+            <td><a href="{{ ktp_ayah_link }}" target="_blank">{{ ktp_ayah }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="ktp_ayah" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(ktp_ayah, 'berkas_ktp_ayah')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Fotocopy KTP Ibu</td>
+            <td><a href="{{ ktp_ibu_link }}" target="_blank">{{ ktp_ibu }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="ktp_ibu" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(ktp_ibu, 'berkas_ktp_ibu')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Fotocopy KTP Saksi 1</td>
+            <td><a href="{{ ktp_saksi1_link }}" target="_blank">{{ ktp_saksi1 }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="saksi" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(saksi, 'berkas_ktp_saksi1')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Fotocopy KTP Saksi 2</td>
+            <td><a href="{{ ktp_saksi2_link }}" target="_blank">{{ ktp_saksi2 }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="saksi2" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(saksi2, 'berkas_ktp_saksi2')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Berita acara kepolisian</td>
+            <td><a href="{{ berita_acara_link }}">{{ berita_acara }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="berita_acara_kep" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(berita_acara_kep, 'berkas_berita_acara_kepolisian')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Kartu Keluarga</td>
+            <td><a href="{{ kk_link }}" target="_blank" ng-disabled="kk == null">{{ kk }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="kartu_kel" ngf-pattern="'image/*'" ngf-max-size="5MB">
+              <button type="button" ng-click="upload(kartu_kel, 'berkas_kk')" class="btn btn-check">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Akte perkawinan</td>
+            <td><a href="{{ akte_perkawinan_link }}">{{ akte_perkawinan }}</a></td>
+            <td>
+              <input type="file" ngf-select ng-model="akt_perkawinan" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button ng-click="upload(akt_perkawinan, 'berkas_akta_perkawinan')" type="button" class="btn btn-check" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Akte kelahiran ibu</td>
+            <td><a href="{{ akte_kelahiran_ibu_link }}" target="_blank">{{ akte_kelahiran_ibu }}</a></td>
+            <td>
+              <input type="file" name="" value="" ngf-select ng-model="akte_kel_ibu" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" class="btn btn-check" ng-click="upload(akte_kel_ibu, 'berkas_akte_kelahiran_ibu')" name="button">Masukkan</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Surat pernyataan belum menikah</td>
+            <td><a href="{{ surat_pernyataan_belum_nikah_link }}" target="_blank">{{ surat_pernyataan_belum_nikah }}</a></td>
+            <td>
+              <input type="file" name="" value="" ngf-select ng-model="surat_pernyataan" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="5MB"/>
+              <button type="button" ng-click="upload(surat_pernyataan, 'berkas_surat_pernyataan_belum_catat_kawin_ibu')" class="btn btn-check" name="button">Masukkan</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="modal-footer">
     </div>
   </div>
+</div>
+<div class="img-modal">
+  <img src="" class="img-content" alt="">
 </div>
 <div class="error">
   <h1>PHP Error</h1>
