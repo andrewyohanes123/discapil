@@ -5,7 +5,7 @@
     </div>
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
-        <label for="nama_bayi">Nama</label>
+        <label for="nama_bayi">Nama Lengkap</label>
         <input type="text" ng-model="nama" id="nama_bayi" class="input" placeholder="Nama" name="" />
         <h5 id="nama_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Nama tidak boleh kosong</h5>
         <label for="jeniskel">Jenis Kelamin</label>
@@ -23,10 +23,26 @@
         </select>
         <input id="tempatLain" type="text" class="input" placeholder="Tempat lain" name="" value="">
         <label for="tempatkel">Tempat kelahiran</label>
+        <div class="input-group">
+          <div class="input-addon">
+            Provinsi
+          </div>
+          <select id="prov" class="input" name="" ng-model="provinsi">
+            <option value="" data-prov="">Propinsi</option>
+            <option ng-repeat="provinsi in list" value="{{ provinsi.NAMA_PROP }}" data-prov="{{ provinsi.NO_PROP }}">{{ provinsi.NAMA_PROP }}</option>
+          </select>
+          <div class="input-addon">
+            Kabupaten/Kota
+          </div>
+          <select class="input" name="" ng-model="kabupatenkota">
+            <option value="">Kabupaten</option>
+            <option ng-repeat="kabkota in listkab" value="{{ kabkota.NAMA_KAB }}">{{ kabkota.NAMA_KAB }}</option>
+          </select>
+        </div>
         <input ng-model="tempatkel" type="text" id="tempatkel" class="input" placeholder="Tempat kelahiran"/>
         <h5 id="tmpt_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Tempat kelahiran tidak boleh kosong</h5>
         <label for="tglLahir">Tanggal lahir</label>
-        <input type="text" ng-model="tglLahir" id="tglLahir" data-field="date" class="input" placeholder="Tanggal Lahir" name="" value="">
+        <input type="text" ng-model="tglLahir" id="tglLahir" class="input" placeholder="Tanggal Lahir" name="" value="">
         <h5 id="tgl_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih tanggal</h5>
         <div id="tanggal"></div>
         <label for="">Pukul</label>

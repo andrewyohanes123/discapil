@@ -34,6 +34,11 @@
 
       </div>
     </div>
+    <div class="loading">
+      <p class="text"></p>
+      <i class="fa fa-spinner fa-lg fa-spin"></i>
+      <p class="progres"></p>
+    </div>
     <div class="wrapper">
       <div class="sidebar-area">
         <div class="sidebar">
@@ -41,21 +46,15 @@
             <a href="#"><i class="fa fa-user-circle fa-lg"></i>&nbsp;{{ username }}</a>
           </span>
           <ul class="sidebar-menu">
-            <li><a href="#!/dash"><i class="fa fa-dashboard fa-lg"></i>&nbsp;Dashboard</a></li>
-            <li><a href="javascript:void(0);"><i class="fa fa-list fa-lg"></i>&nbsp;Daftar laporan <span class="slide-icon"><i class="fa fa-angle-down fa-lg"></i></span></a>
+            <li><a href="javascript:void(0)"><i class="fa fa-dashboard fa-lg"></i>&nbsp;Dashboard</a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-list fa-lg"></i>&nbsp;Daftar laporan <span class="slide-icon"><i class="fa fa-angle-down fa-lg"></i></span></a>
               <ul class="submenu">
                 <li><a href="#" class="submenu-active"><i class="fa fa-list-ul fa-lg"></i>&nbsp;Semua</a></li>
+                <li><a href="#!/selesai"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Selesai</a></li>
                 <li><a href="#!/diverifikasi"><i class="fa fa-check-square fa-lg"></i>&nbsp;Diverifikasi</a></li>
-                <li><a href="#!/tidak_diverifikasi"><i class="fa fa-times fa-lg"></i>&nbsp;Tidak diverifikasi</a></li>
+                <li><a href="#!/tidak_diverifikasi"><i class="fa fa-times fa-lg"></i>&nbsp;Belum diverifikasi</a></li>
               </ul>
             </li>
-            <!-- <li><a href="javascript:void(0)"><i class="fa fa-file fa-lg"></i>&nbsp;Daftar berkas<span class="slide-icon"><i class="fa fa-angle-down fa-lg"></i></span></a>
-              <ul class="submenu">
-                <li><a href="#"><i class="fa fa-check-square fa-lg"></i>&nbsp;Diterima</a></li>
-                <li><a href="#"><i class="fa fa-times-circle-o fa-lg"></i>&nbsp;Tidak diverifikasi</a></li>
-                <li><a href="#"><i class="fa fa-window-close fa-lg"></i>&nbsp;Tidak lengkap</a></li>
-              </ul>
-            </li> -->
             <li><a href="javascript:void(0)"><i class="fa fa-cog fa-lg"></i>&nbsp;Pengaturan<span class="slide-icon"><i class="fa fa-angle-down fa-lg"></i></span></a>
               <ul class="submenu">
                 <li><a href="#!/user"><i class="fa fa-user-circle fa-lg"></i>&nbsp;Pengguna</a></li>
@@ -65,10 +64,11 @@
         </div>
       </div>
       <div class="content-area">
-        <div class="container">
-          <div ng-view>
-          </div>
+        <div ng-view>
         </div>
+      </div>
+      <div class="img-modal">
+        <img src="" class="img-content" alt="">
       </div>
     </div>
   </body>

@@ -169,10 +169,48 @@
     }
   }
 
-  $.fn.errorWarning = function(arr)
+  $.fn.loadingMsg = function(mode, pesan, progress = null)
   {
-    $.each(arr, function(val, key){
+    if (mode == 'show')
+    {
+      $(this).css('animation', '750ms loading-in forwards');
+      $(this).show();
+      $(this).children('.text').empty();
+      $(this).children('.text').text(pesan);
+      if (progress != null)
+      {
+        $(this).children('.progress').show();
+        $(this).children('.progress').empty();
+        $(this).children('.progress').text(progress + "%");
+      }
+    }
+    else if (mode == 'hide')
+    {
+      $(this).css('animation', '750ms loading-out forwards');
+    }
+  }
 
-    })
+  $.fn.pesanError = function(mode, error)
+  {
+    if (mode == "PHPDBERROR")
+    {
+      $('.errors').show();
+      $.each(error, function(val, key){
+        $('.errors').append('<p>' + key + '</p>');
+      })
+    }
+    else if (mode == "PHPERROR")
+    {
+      $('.errors').show();
+      $.each(error, function(val, key){
+        $('.errors').append('<div class="error">' +
+        '<p>Type : ' + key.type + '</p>' +
+        '<p>Message : ' + key.message + '</p>' +
+        '<p>File : ' + key.file + '</p>' +
+        '<p>Line : ' + key.line + '</p>' +
+        '<p>Code :' + key.code + '</p></div>'
+      );
+      })
+    }
   }
 })(jQuery)

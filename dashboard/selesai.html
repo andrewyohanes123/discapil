@@ -1,99 +1,102 @@
 <div class="container">
   <div class="kotak">
     <div class="head">
-      <div class="head-title">
-        <i class="fa fa-list-ul fa-lg"></i>&nbsp;Laporan (Belum diverifikasi)
+      <p class="head-title"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Selesai</p>
+    </div>
+    <div class="kotak-body">
+      <div class="row">
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-addon">
+              <i class="fa fa-filter fa-lg"></i>&nbsp;Urut berdasarkan
+            </div>
+            <select ng-model="order" id="order" class="input" name="">
+              <option value="no_kk">Nomor KK</option>
+              <option value="nama">Nama bayi</option>
+              <option value="tanggal_pendaftaran">Tanggal pendaftaran</option>
+              <option value="tanggal_lahir">Tanggal lahir bayi</option>
+            </select>
+            <div class="input-addon">
+              <i class="fa fa-sort fa-lg"></i>&nbsp;Sortir
+            </div>
+            <select id="sort" ng-model="sort" class="input" name="">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="input-group">
+            <input type="text" ng-model="cari" id="cari" placeholder="Cari nomor KK" class="input" name="" value="">
+            <span class="input-addon-btn">
+              <button type="button" class="btn btn-next" name="button"><i class="fa fa-search fa-lg"></i>&nbsp;Cari</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group">
+            <div class="input-addon">
+              Batas
+            </div>
+            <select ng-model="batas" id="batas" class="input" name="">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-6">
+          <div class="input-group">
+            <span class="input-addon">
+              Range tanggal
+            </span>
+            <input type="text" ng-model="tgl" id="tgl" placeholder="Tanggal awal" class="input" name="" value="">
+            <div class="input-addon">
+              s/d
+            </div>
+            <input type="text" id="tgl2" ng-model="tgl2" placeholder="Tanggal akhir" class="input" name="" value="">
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Nomor KK</th>
+            <th>Nama Bayi</th>
+            <th>No. pendaftaran</th>
+            <th>Tanggal lahir</th>
+            <th>Tanggal pendaftaran</th>
+            <th>Nomor Telp</th>
+            <th>Detail/Verifikasi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-show="totalData == 0">
+            <td colspan="8" style="text-align:center;">Tidak ada antrian pada tanggal <b>{{ tgl }}</b> s/d <b>{{ tgl2 }}</b></td>
+          </tr>
+          <tr ng-repeat="list in daftar">
+            <td>{{ daftar.indexOf(list) + 1 }}</td>
+            <td>{{ list.no_kk }}</td>
+            <td>{{ list.nama }}</td>
+            <td>{{ list.no_antrian }}</td>
+            <td>{{ list.tanggal_lahir }}</td>
+            <td>{{ list.tanggal_pendaftaran }}</td>
+            <td>{{ list.p_no_telfon }}</td>
+            <td><button type="button" class="btn btn-check" ng-click="detail(list.id_bayi)">Detail</button></td>
+          </tr>
+        </tbody>
+      </table>
       <div class="kotak-body">
-        <div class="row">
-          <div class="col-8">
-            <div class="input-group">
-              <div class="input-addon">
-                <i class="fa fa-filter fa-lg"></i>&nbsp;Urut berdasarkan
-              </div>
-              <select ng-model="order" id="order" class="input" name="">
-                <option value="no_kk">Nomor KK</option>
-                <option value="nama">Nama bayi</option>
-                <option value="tanggal_pendaftaran">Tanggal pendaftaran</option>
-                <option value="tanggal_lahir">Tanggal lahir bayi</option>
-              </select>
-              <div class="input-addon">
-                <i class="fa fa-sort fa-lg"></i>&nbsp;Sortir
-              </div>
-              <select id="sort" ng-model="sort" class="input" name="">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="input-group">
-              <input type="text" ng-model="cari" id="cari" placeholder="Cari nomor KK" class="input" name="" value="">
-              <span class="input-addon-btn">
-                <button type="button" class="btn btn-next" name="button"><i class="fa fa-search fa-lg"></i>&nbsp;Cari</button>
-              </span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="input-group">
-              <div class="input-addon">
-                Batas
-              </div>
-              <select ng-model="batas" id="batas" class="input" name="">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-4">
-          </div>
-          <div class="col-6">
-            <div class="input-group">
-              <span class="input-addon">
-                Range tanggal
-              </span>
-              <input type="text" ng-model="tgl" id="tgl" placeholder="Tanggal awal" class="input" name="" value="">
-              <div class="input-addon">
-                s/d
-              </div>
-              <input type="text" id="tgl2" ng-model="tgl2" placeholder="Tanggal akhir" class="input" name="" value="">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Nomor KK</th>
-              <th>Nama Bayi</th>
-              <th>Tanggal lahir</th>
-              <th>Tanggal pendaftaran</th>
-              <th>Nomor Telp</th>
-              <th>Detail/Verifikasi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="list in daftar">
-              <td>{{ daftar.indexOf(list) + 1 }}</td>
-              <td>{{ list.no_kk }}</td>
-              <td>{{ list.nama }}</td>
-              <td>{{ list.tanggal_lahir }}</td>
-              <td>{{ list.tanggal_pendaftaran }}</td>
-              <td>{{ list.p_no_telfon }}</td>
-              <td><button type="button" class="btn btn-check" ng-click="detail(list.id_bayi)">Detail</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="kotak-body">
-          <button type="button" class="btn btn-prev" ng-disabled="currentpage == 1" ng-click="prev()" name="button">Sebelumnya</button>
-          <button type="button" class="btn btn-prev" ng-disabled="currentpage == totalHalaman" ng-click="pindahHalaman()" name="button">Berikutnya</button>
-          <code>{{ currentpage }} dari {{ totalHalaman }} Halaman</code>
-        </div>
+        <button type="button" class="btn btn-prev" ng-disabled="currentpage == 1" ng-click="prev()" name="button">Sebelumnya</button>
+        <button type="button" class="btn btn-prev" ng-disabled="currentpage == totalHalaman || totalHalaman == 0" ng-click="pindahHalaman()" name="button">Berikutnya</button>
+        <code ng-show="totalHalaman != 0">{{ currentpage }} dari {{ totalHalaman }} Halaman</code>
       </div>
     </div>
   </div>
@@ -165,15 +168,13 @@
           </div>
           </div>
           <div class="collapse">
-            <div class="head darkblue">
-              <p><i class="fa fa-user fa-lg"></i>&nbsp;Keterangan operator</p>
+            <div class="head turquoise">
+              <p><i class="fa fa-edit fa-lg"></i>&nbsp;Keterangan operator</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="collapse-body">
-              <input type="hidden" ng-model="id_bayi" name="" value="">
-              <label for="">Keterangan operator</label>
-              <textarea placeholder="Keterangan" name="name" class="input" ng-model="keterangan" rows="5" cols="80"></textarea>
-              <button type="button" ng-click="updateKeterangan(id_bayi)" class="btn btn-next" name="button">Simpan</button>
+              <label for="">Keterangan</label>
+              <textarea name="name" ng-model="keterangan" class="input" rows="5" readonly cols="80"></textarea>
             </div>
           </div>
         </div>
@@ -199,7 +200,7 @@
               </tr>
               <tr>
                 <td>Tempat kelahiran</td>
-                <td>{{ data_keluarga.prov_kelahiran }}, {{ data_keluarga.kotakab_kelahiran }}, {{ tempat_kelahiran }}</td>
+                <td>{{ data_keluarga.prov_kelahiran }}, {{ data.kotakab_kelahiran }}, {{ tempat_kelahiran }}</td>
               </tr>
               <tr>
                 <td>Tanggal lahir</td>
@@ -231,29 +232,27 @@
               </tr>
             </table>
           </div>
-          </div>
           <div class="collapse">
             <div class="head blue">
-              <p><i class="fa fa-user fa-lg"></i>&nbsp;Data keluarga</p>
+              <p><i class="fa fa-user-circle fa-lg"></i>&nbsp;Data keluarga</p>
               <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
             </div>
             <div class="containers">
               <table class="table">
-                <tbody>
-                  <tr>
-                    <td>Nomor telepon</td>
-                    <td>{{ data_keluarga.p_no_telfon }}</td>
-                  </tr>
-                  <tr>
-                    <td>Alamat</td>
-                    <td>{{ data_keluarga.p_alamat }}</td>
-                  </tr>
-                  <tr>
-                    <td>Pernyataan</td>
-                    <td>{{ data_keluarga.p_pernyataan }}</td>
-                  </tr>
-                </tbody>
+                <tr>
+                  <td>Nomor telepon</td>
+                  <td>{{ data_keluarga.p_no_telfon }}</td>
+                </tr>
+                <tr>
+                  <td>Alamat</td>
+                  <td>{{ data_keluarga.p_alamat }}</td>
+                </tr>
+                <tr>
+                  <td>Pernyataan</td>
+                  <td>{{ data_keluarga.p_pernyataan }}</td>
+                </tr>
               </table>
+            </div>
             </div>
           </div>
         </div>

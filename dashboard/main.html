@@ -69,6 +69,7 @@
           <th>No.</th>
           <th>Nomor KK</th>
           <th>Nama Bayi</th>
+          <th>No. pendaftaran</th>
           <th>Tanggal lahir</th>
           <th>Tanggal pendaftaran</th>
           <th>Nomor Telp</th>
@@ -76,11 +77,15 @@
         </tr>
       </thead>
       <tbody>
+        <tr ng-show="totalData == 0">
+          <td colspan="8" style="text-align: center;">Tidak ada laporan</td>
+        </tr>
         <tr ng-repeat="list in daftar">
           <!-- <td colspan="6"><center>Tidak ada pendaftaran</center></td> -->
           <td>{{ daftar.indexOf(list) + 1 }}</td>
           <td>{{ list.no_kk }}</td>
           <td>{{ list.nama }}</td>
+          <td>{{ list.no_antrian }}</td>
           <td>{{ list.tanggal_lahir }}</td>
           <td>{{ list.tanggal_pendaftaran }}</td>
           <td>{{ list.p_no_telfon }}</td>
@@ -168,6 +173,18 @@
             </table>
           </div>
           </div>
+          <div class="collapse">
+            <div class="head darkblue">
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Keterangan operator</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <input type="hidden" ng-model="id_bayi" name="" value="">
+              <label for="">Keterangan operator</label>
+              <textarea placeholder="Keterangan" name="name" class="input" ng-model="keterangan" rows="5" cols="80"></textarea>
+              <button type="button" ng-click="updateKeterangan(id_bayi)" class="btn btn-next" name="button">Simpan</button>
+            </div>
+          </div>
         </div>
         <div class="col-6">
           <div class="collapse">
@@ -191,7 +208,7 @@
               </tr>
               <tr>
                 <td>Tempat kelahiran</td>
-                <td>{{ tempat_kelahiran }}</td>
+                <td>{{ data_keluarga.prov_kelahiran }}, {{ data_keluarga.kotakab_kelahiran }}, {{ tempat_kelahiran }}</td>
               </tr>
               <tr>
                 <td>Tanggal lahir</td>
@@ -223,6 +240,30 @@
               </tr>
             </table>
           </div>
+          </div>
+          <div class="collapse">
+            <div class="head blue">
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Data keluarga</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="containers">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Nomor telepon</td>
+                    <td>{{ data_keluarga.p_no_telfon }}</td>
+                  </tr>
+                  <tr>
+                    <td>Alamat</td>
+                    <td>{{ data_keluarga.p_alamat }}</td>
+                  </tr>
+                  <tr>
+                    <td>Pernyataan</td>
+                    <td>{{ data_keluarga.p_pernyataan }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

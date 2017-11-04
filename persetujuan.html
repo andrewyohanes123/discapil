@@ -12,7 +12,7 @@
         <label for="">Pernyataan</label>
         <textarea name="name" rows="3" ng-model="pernyataan" id="pernyataan" class="input" placeholder="Pernyataan" cols="80"></textarea>
         <label for="check"><input type="checkbox" id="check" ng-model="setuju" name="" value=""> Saya setuju</label><br>
-        <button type="button" class="btn btn-prev" onclick="window.location.replace('#!/halaman5')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Kembali</button>
+        <button type="button" class="btn btn-prev" onclick="window.location.replace('#!/halaman7')" name="button"><i class="fa fa-angle-left fa-lg"></i>&nbsp;Kembali</button>
         <button type="button" ng-disabled="setuju == false" class="btn btn-next" name="button"><i class="fa fa-save fa-lg"></i>&nbsp;Simpan</button>
       </form>
     </div>
@@ -24,11 +24,44 @@
       <p class="title"><i class="fa fa-info-circle fa-lg"></i>&nbsp;Pendaftaran berhasil</p>
     </div>
     <div id="nomor_pendaftaran" class="modal-content">
-      <h1 class="pendaftaran-berhasil">Pendaftaran berhasil</h1>
-      <h4 class="pendaftaran-berhasil">Nomor pendaftaran anda :</h4>
-      <h1 class="nomor-pendaftaran">{{ nomor_daftar }}</h1>
+      <div id="data">
+        <h1 class="pendaftaran-berhasil">Pendaftaran berhasil</h1>
+        <h4 class="pendaftaran-berhasil">Nomor pendaftaran anda :</h4>
+        <h1 class="nomor-pendaftaran">{{ nomor_daftar }}</h1>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Data</th>
+                <th>Pendaftaran</th>
+              </tr>
+              <tr>
+                <td>No. Pendaftaran</td>
+                <td>{{ nomor_daftar }}</td>
+              </tr>
+              <tr>
+                <td>No. KK</td>
+                <td>{{ data.no_kk }}</td>
+              </tr>
+              <tr>
+                <td>Nama Kepala Keluarga</td>
+                <td>{{ data.nama_kepala_keluarga }}</td>
+              </tr>
+              <tr>
+                <td>Nama Lengkap Bayi</td>
+                <td>{{ data.nama }}</td>
+              </tr>
+              <tr>
+                <td>Alamat</td>
+                <td>{{ data.p_alamat }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <hr>
       <button type="button" class="btn btn-prev" onclick="printJS('nomor_pendaftaran', 'html')" name="button"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
+      <button type="button" class="btn btn-edit" ng-click="pdf()" name="button"><i class="fa fa-file-pdf fa-lg"></i>&nbsp;Simpan ke PDF</button>
       <a href="index.html" class="home-btn"><i class="fa fa-home fa-lg"></i>&nbsp;Halaman utama</a>
       <h4><i class="fa fa-upload fa-lg"></i>&nbsp;File upload</h4>
       <div class="table-responsive">
