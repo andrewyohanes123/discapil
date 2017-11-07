@@ -1713,31 +1713,64 @@ app.controller('cek_status', function($scope, $cookies, $http){
 
   $scope.pdf = function()
   {
-    var doc = new jsPDF();
-    var data = {
-      '#data' : function(element, renderer){
-        return true;
-      }
-    }
-    doc.addImage(img,10, 10, 18, 20);
-    doc.setFontSize(20);
+    var doc = new jsPDF({
+      orientaion : 'landscape',
+      unit : 'in',
+      format : [4, 4]
+    });
+    doc.setFontSize(9);
     doc.setFont("helvetica");
     doc.setFontType("bold");
-    doc.text(105, 15, "Dinas Kependudukan dan Pencatatan Sipil", null, null, 'center');
-    doc.setFontSize(16);
-    doc.text(105, 20, "Pemerintah Kota Manado", null, null, 'center');
-    doc.setFontSize(14);
-    doc.text(105, 30, "Pendaftaran Akte Kelahiran Online", null, null, 'center')
-    doc.setFontSize(10);
+    doc.text(2, 0.25, "Dinas Kependudukan dan Pencatatan Sipil", null, null, 'center');
+    doc.setFontSize(8);
+    doc.text(2, 0.40, "Pemerintah Kota Manado", null, null, 'center');
+    doc.addImage(img, 0.19, 0.191, 0.2, 0.24);
     doc.setFontType("normal");
-    doc.fromHTML($('#data').get(0), 25, 40, {
-      width : 250,
-      elementHandlers : data
-    })
-    doc.setFontSize(10);
+    doc.setFontSize(8)
+    doc.text(0.2, 8/10, "Nomor KK");
+    doc.text(0.2, 9.5/10, "Nama Kepala Keluarga");
+    doc.text(0.2, 11/10, "Nama lengkap bayi");
+    doc.text(0.2, 12.5/10, "Verifikasi");
+    doc.text(0.2, 14/10, "Status");
+    doc.text(0.2, 15.5/10, "Keterangan operator");
+    //
+    doc.text(1.8, 8/10, ":");
+    doc.text(1.8, 9.5/10, ":");
+    doc.text(1.8, 11/10, ":");
+    doc.text(1.8, 12.5/10, ":");
+    doc.text(1.8, 14/10, ":");
+    doc.text(1.8, 15.5/10, ":");
+    //
+    doc.text(2, 8/10, $scope.data.no_kk);
+    doc.text(2, 9.5/10, $scope.data.nama_kepala_keluarga);
+    doc.text(2, 11/10, $scope.data.nama);
+    doc.text(2, 12.5/10, $scope.data.approved);
+    doc.text(2, 14/10, $scope.data.status);
+    doc.text(2, 15.5/10, $scope.data.approving_note);
+    //
+    doc.setFontSize(8);
     doc.setFontType('courier');
-    doc.text(10, 275, "Cek status berita di : http://");
-    doc.text(10, 280, "Pendaftaran antrian di : http://");
+    doc.text(0.2, 3, "Cek status di : http://");
+    doc.text(0.2, 3.15, "Pendaftaran antrian di : http://");
+    // doc.addImage(img,10, 10, 18, 20);
+    // doc.setFontSize(20);
+    // doc.setFont("helvetica");
+    // doc.setFontType("bold");
+    // doc.text(105, 15, "Dinas Kependudukan dan Pencatatan Sipil", null, null, 'center');
+    // doc.setFontSize(16);
+    // doc.text(105, 20, "Pemerintah Kota Manado", null, null, 'center');
+    // doc.setFontSize(14);
+    // doc.text(105, 30, "Pendaftaran Akte Kelahiran Online", null, null, 'center')
+    // doc.setFontSize(10);
+    // doc.setFontType("normal");
+    // doc.fromHTML($('#data').get(0), 25, 40, {
+    //   width : 250,
+    //   elementHandlers : data
+    // })
+    // doc.setFontSize(10);
+    // doc.setFontType('courier');
+    // doc.text(10, 275, "Cek status berita di : http://");
+    // doc.text(10, 280, "Pendaftaran antrian di : http://");
     doc.save(parseInt(Math.random() * 39) + $scope.data.no_kk + $scope.data.nama + '_cek_status.pdf');
   }
 });
@@ -1942,34 +1975,45 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
 
   $scope.pdf = function()
   {
-    var doc = new jsPDF();
-    var data = {
-      '#data' : function(element, renderer){
-        return true;
-      },
-      '.pendaftaran-berhasil' : function(element, renderer){
-        return true;
-      }
-    }
-    doc.addImage(img,10, 10, 18, 20);
-    doc.setFontSize(20);
+    var doc = new jsPDF({
+      orientaion : 'landscape',
+      unit : 'in',
+      format : [4, 4]
+    });
+    doc.setFontSize(9);
     doc.setFont("helvetica");
     doc.setFontType("bold");
-    doc.text(105, 15, "Dinas Kependudukan dan Pencatatan Sipil", null, null, 'center');
-    doc.setFontSize(16);
-    doc.text(105, 20, "Pemerintah Kota Manado", null, null, 'center');
-    doc.setFontSize(14);
-    doc.text(105, 30, "Pendaftaran Akte Kelahiran Online", null, null, 'center')
-    doc.setFontSize(10);
+    doc.text(2, 0.25, "Dinas Kependudukan dan Pencatatan Sipil", null, null, 'center');
+    doc.setFontSize(8);
+    doc.text(2, 0.40, "Pemerintah Kota Manado", null, null, 'center');
+    doc.addImage(img, 0.19, 0.191, 0.2, 0.24);
     doc.setFontType("normal");
-    doc.fromHTML($('#data').get(0), 25, 40, {
-      width : 250,
-      elementHandlers : data
-    })
-    doc.setFontSize(10);
+    doc.setFontSize(8)
+    doc.text(0.2, 8/10, "Nomor Pendaftaran");
+    doc.text(0.2, 9.5/10, "Nomor KK");
+    doc.text(0.2, 11/10, "Nama kepala keluarga");
+    doc.text(0.2, 12.5/10, "Nama Lengkap bayi");
+    doc.text(0.2, 14/10, "Alamat");
+    // doc.text(0.2, 15.5/10, "Keterangan operator");
+    //
+    doc.text(1.8, 8/10, ":");
+    doc.text(1.8, 9.5/10, ":");
+    doc.text(1.8, 11/10, ":");
+    doc.text(1.8, 12.5/10, ":");
+    doc.text(1.8, 14/10, ":");
+    // doc.text(1.8, 15.5/10, ":");
+    //
+    doc.text(2, 8/10, $scope.nomor_daftar);
+    doc.text(2, 9.5/10, $scope.data.no_kk);
+    doc.text(2, 11/10, $scope.data.nama_kepala_keluarga);
+    doc.text(2, 12.5/10, $scope.data.nama);
+    doc.text(2, 14/10, $scope.data.p_alamat);
+    // doc.text(2, 15.5/10, $scope.data.approving_note);
+    //
+    doc.setFontSize(8);
     doc.setFontType('courier');
-    doc.text(10, 275, "Cek status berita di : http://");
-    doc.text(10, 280, "Pendaftaran antrian di : http://");
+    doc.text(0.2, 3, "Cek status di : http://");
+    doc.text(0.2, 3.15, "Pendaftaran antrian di : http://");
     doc.save(parseInt(Math.random() * 39) + $scope.data.no_kk + $scope.data.nama + '_cek_status.pdf');
   }
 
@@ -2215,13 +2259,13 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
       var status = resp.data.status;
       if (status == "PHPERROR")
       {
-        $('.error').show();
-        var error = resp.data.errors[0];
-        $scope.type = error.type;
-        $scope.msg = error.message;
-        $scope.file = error.file;
-        $scope.line = error.line;
-        $scope.code = error.code;
+        var error = resp.data.errors;
+        $('.errors').pesanError(status, error);
+      }
+      else if (status == "PHPDBERROR")
+      {
+        var error = resp.data.errors;
+        $('.errors').pesanError(status, error);
       }
       else if (status)
       {
@@ -2243,7 +2287,7 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
       }
       else
       {
-        alert('Pendaftaran gagal');
+        alert(resp.data.message);
       }
     });
   });
