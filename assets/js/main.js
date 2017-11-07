@@ -77,11 +77,9 @@ dash.controller('user', function($scope, $http){
     }
     $scope.id = id;
     aktif = aktif + "";
-    // console.log(aktif);
     $scope.aktif = aktif;
     $scope.nama_lengkap = nama;
     $scope.username = username;
-    // $scope.blokir = false;
     $scope.mode = mode;
     $scope.btn = btn;
     $('.modal').modalPopup('show');
@@ -93,6 +91,7 @@ dash.controller('user', function($scope, $http){
     {
       mode = 'tambah';
     }
+
     if (mode == 'Tambah user')
     {
       var data = {
@@ -257,6 +256,28 @@ dash.controller('selesai', function($scope, $http){
   $scope.tgl = moment().startOf('month').format('YYYY-MM-DD');
   $scope.tgl2 = moment().endOf('month').format('YYYY-MM-DD');
   $scope.currentpage = 1;
+
+  $('tr th').click(function(){
+    var data = $(this).data('order');
+    if (!data)
+    {
+      return false;
+    }
+    else
+    {
+      $scope.order= data;
+      if ($scope.sort == "asc")
+      {
+        $scope.sort = "desc";
+      }
+      else
+      {
+        $scope.sort = "asc";
+      }
+
+      $scope.getDaftar();
+    }
+  });
 
   $scope.updateKeterangan = function(id)
   {
@@ -566,6 +587,28 @@ dash.controller('verif', function($scope, $http){
   $scope.tgl = moment().startOf('month').format('YYYY-MM-DD');
   $scope.tgl2 = moment().endOf('month').format('YYYY-MM-DD');
   $scope.currentpage = 1;
+
+  $('tr th').click(function(){
+    var data = $(this).data('order');
+    if (!data)
+    {
+      return false;
+    }
+    else
+    {
+      $scope.order= data;
+      if ($scope.sort == "asc")
+      {
+        $scope.sort = "desc";
+      }
+      else
+      {
+        $scope.sort = "asc";
+      }
+
+      $scope.getDaftar();
+    }
+  });
 
   $scope.updateKeterangan = function(id)
   {
@@ -884,6 +927,28 @@ dash.controller('blm_verif', function($scope, $http){
   $scope.tgl = moment().startOf('month').format('YYYY-MM-DD');
   $scope.tgl2 = moment().endOf('month').format('YYYY-MM-DD');
   $scope.currentpage = 1;
+
+  $('tr th').click(function(){
+    var data = $(this).data('order');
+    if (!data)
+    {
+      return false;
+    }
+    else
+    {
+      $scope.order= data;
+      if ($scope.sort == "asc")
+      {
+        $scope.sort = "desc";
+      }
+      else
+      {
+        $scope.sort = "asc";
+      }
+
+      $scope.getDaftar();
+    }
+  });
 
   $scope.updateKeterangan = function(id)
   {
@@ -1211,6 +1276,21 @@ dash.controller('listPendaftaran', function($scope, $http){
       $('.notifikasi').notifikasi(pesan, 3000);
     });
   }
+
+  $('tr th').click(function(){
+    var data = $(this).data('order');
+    $scope.order= data;
+    if ($scope.sort == "asc")
+    {
+      $scope.sort = "desc";
+    }
+    else
+    {
+      $scope.sort = "asc";
+    }
+
+    $scope.getDaftar();
+  });
 
   $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
 
@@ -1858,7 +1938,7 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
     $cookies.remove('id_provinsi');
     $cookies.remove('pernyataan');
     // return false
-  })
+  });
 
   $scope.pdf = function()
   {

@@ -5,50 +5,6 @@
     </div>
     <div class="kotak-body">
       <div class="row">
-        <div class="col-8">
-          <div class="input-group">
-            <div class="input-addon">
-              <i class="fa fa-filter fa-lg"></i>&nbsp;Urut berdasarkan
-            </div>
-            <select ng-model="order" id="order" class="input" name="">
-              <option value="no_kk">Nomor KK</option>
-              <option value="nama">Nama bayi</option>
-              <option value="tanggal_pendaftaran">Tanggal pendaftaran</option>
-              <option value="tanggal_lahir">Tanggal lahir bayi</option>
-            </select>
-            <div class="input-addon">
-              <i class="fa fa-sort fa-lg"></i>&nbsp;Sortir
-            </div>
-            <select id="sort" ng-model="sort" class="input" name="">
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="input-group">
-            <input type="text" ng-model="cari" id="cari" placeholder="Cari nomor KK" class="input" name="" value="">
-            <span class="input-addon-btn">
-              <button type="button" class="btn btn-next" name="button"><i class="fa fa-search fa-lg"></i>&nbsp;Cari</button>
-            </span>
-          </div>
-        </div>
-        <div class="col-2">
-          <div class="input-group">
-            <div class="input-addon">
-              Batas
-            </div>
-            <select ng-model="batas" id="batas" class="input" name="">
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="25">25</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-4">
-        </div>
         <div class="col-6">
           <div class="input-group">
             <span class="input-addon">
@@ -61,6 +17,23 @@
             <input type="text" id="tgl2" ng-model="tgl2" placeholder="Tanggal akhir" class="input" name="" value="">
           </div>
         </div>
+        <div class="col-2">
+        </div>
+        <div class="col-4">
+          <div class="input-group">
+            <input type="text" ng-model="cari" id="cari" placeholder="Cari nomor KK" class="input" name="" value="">
+            <span class="input-addon-btn">
+              <button type="button" class="btn btn-next" name="button"><i class="fa fa-search fa-lg"></i>&nbsp;Cari</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-6">
+        </div>
       </div>
     </div>
     <div class="table-responsive">
@@ -68,13 +41,13 @@
         <thead>
           <tr>
             <th>No.</th>
-            <th>Nomor KK</th>
-            <th>Nama Bayi</th>
-            <th>No. pendaftaran</th>
-            <th>Tanggal lahir</th>
-            <th>Tanggal pendaftaran</th>
-            <th>Nomor Telp</th>
-            <th>Detail/Verifikasi</th>
+            <th data-order="no_kk">Nomor KK</th>
+            <th data-order="nama">Nama Bayi</th>
+            <th data-order="no_antrian">No Pendaftaran</th>
+            <th data-order="tanggal_lahir">Tanggal lahir</th>
+            <th data-order="tanggal_pendaftaran">Tanggal pendaftaran</th>
+            <th data-order="p_no_telfon">Nomor Telp</th>
+            <th>Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -96,7 +69,23 @@
       <div class="kotak-body">
         <button type="button" class="btn btn-prev" ng-disabled="currentpage == 1" ng-click="prev()" name="button">Sebelumnya</button>
         <button type="button" class="btn btn-prev" ng-disabled="currentpage == totalHalaman || totalHalaman == 0" ng-click="pindahHalaman()" name="button">Berikutnya</button>
-        <code ng-show="totalHalaman != 0">{{ currentpage }} dari {{ totalHalaman }} Halaman</code>
+        <div style="float:right; max-width: 16.667%;" class="input-group">
+          <div class="input-addon">
+            Batas
+          </div>
+          <select ng-model="batas" id="batas" class="input" name="">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </select>
+        </div>
+        <code ng-hide="totalHalaman == 0">{{ currentpage }} dari {{ totalHalaman }} halaman</code>
+        <div class="row">
+          <div class="col-6">
+          </div>
+        </div>
       </div>
     </div>
   </div>

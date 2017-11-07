@@ -611,6 +611,7 @@ code:after {
   text-align: left;
   border-right: 1px solid #ddd;
   border-bottom: 2.5px solid #ddd;
+  cursor: pointer;
 }
 
 .table tr th:last-child {
