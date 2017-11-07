@@ -1,13 +1,17 @@
 (function($){
-  $.fn.notifikasi = function(pesan, timeout = 2000)
+  $.fn.notifikasi = function(pesan, timeout)
   {
-      $('.notifikasi').css('animation', '750ms notif-in forwards');
-      $('.notifikasi').css('display', 'flex');
-      $('.notifikasi-body').empty();
-      $('.notifikasi-body').text(pesan);
-      setTimeout(function(){
-        $('.notifikasi').css('animation', '750ms notif-out forwards');
-      }, timeout)
+    if (timeout === undefined)
+    {
+      timeout = 2000;
+    }
+    $('.notifikasi').css('animation', '750ms notif-in forwards');
+    $('.notifikasi').css('display', 'flex');
+    $('.notifikasi-body').empty();
+    $('.notifikasi-body').text(pesan);
+    setTimeout(function(){
+      $('.notifikasi').css('animation', '750ms notif-out forwards');
+    }, timeout)
   }
 
   $.fn.modalPopup = function(mode, config)
@@ -169,8 +173,13 @@
     }
   }
 
-  $.fn.loadingMsg = function(mode, pesan, progress = null)
+  $.fn.loadingMsg = function(mode, pesan, progress)
   {
+    if (progress === undefined)
+    {
+      progress = null;
+    }
+
     if (mode == 'show')
     {
       $(this).css('animation', '750ms loading-in forwards');
@@ -213,4 +222,27 @@
       })
     }
   }
+
+  jQuery.fn.ForceNumericOnly = function()
+  {
+    return this.each(function()
+    {
+      $(this).keydown(function(e)
+      {
+        var key = e.charCode || e.keyCode || 0;
+        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+        // home, end, period, and numpad decimal
+        return (
+          key == 8 ||
+          key == 9 ||
+          key == 13 ||
+          key == 46 ||
+          key == 110 ||
+          key == 190 ||
+          (key >= 35 && key <= 40) ||
+          (key >= 48 && key <= 57) ||
+          (key >= 96 && key <= 105));
+      });
+    });
+};
 })(jQuery)

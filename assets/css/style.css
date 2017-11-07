@@ -738,9 +738,9 @@ textarea.input {
   width: 100%;
   margin: 5px auto;
   box-sizing: border-box;
-  border-style: none;
-  border: .5px solid #47a3d0;
-  font-size: 15px;
+  border: 1px solid #47a3d0;
+  border-style: solid !important;
+  font-size: 12px;
   border-radius: 5px;
 }
 

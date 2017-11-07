@@ -5,8 +5,15 @@
     </div>
     <div class="form-pendaftaran">
       <form class="group" action="index.html" method="post">
+        <label for="">NIK bayi</label>
+        <div class="input-group">
+          <input type="number" class="input" placeholder="Masukkan NIK bayi/anak jika ada" ng-model="nik_bayi" name="" value="">
+          <span class="input-addon-btn">
+            <button type="button" class="btn btn-check" ng-click="cek(nik_bayi)" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+          </span>
+        </div>
         <label for="nama_bayi">Nama Lengkap</label>
-        <input type="text" ng-model="nama" id="nama_bayi" class="input" placeholder="Nama" name="" />
+        <input type="text" ng-model="nama" id="nama_bayi" class="input" placeholder="Nama Lengkap" name="" />
         <h5 id="nama_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Nama tidak boleh kosong</h5>
         <label for="jeniskel">Jenis Kelamin</label>
         <select ng-model="jen_kel" class="input" name="">
@@ -73,12 +80,12 @@
         </select>
         <label for="">Berat bayi</label>
         <div class="input-group">
-          <input ng-model="berat_bayi" id="berat" type="number" class="input" placeholder="Berat bayi" name="" value="">
+          <input ng-model="berat_bayi" id="berat" type="text" class="input" placeholder="Berat bayi" name="" value="">
           <span class="input-addon">Kg</span>
         </div>
         <label for="">Panjang bayi</label>
         <div class="input-group">
-          <input ng-model="panjang_bayi" id="panjang" type="number" class="input" placeholder="Panjang bayi" name="" value="">
+          <input ng-model="panjang_bayi" id="panjang" type="text" class="input" placeholder="Panjang bayi" name="" value="">
           <span class="input-addon">Cm</span>
         </div>
         <hr>
