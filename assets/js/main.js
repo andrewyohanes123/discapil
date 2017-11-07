@@ -2262,11 +2262,6 @@ app.controller('saksi2', function($scope, data, $cookies, $http){
     }
   });
 
-  $('#luarManado').click(function(){
-    $('#nik').val(null);
-    $('#nama').val(null);
-  });
-
   var datas = $cookies.getObject('sk2');
   var prevPage = $cookies.getObject('sk1');
   if (!datas)
@@ -2527,11 +2522,6 @@ app.controller('saksi1', function($scope, data, $cookies, $http){
     }
   });
 
-  $('#luarManado').click(function(){
-    $('#nik').val(null);
-    $('#nama').val(null);
-  });
-
   var datas = $cookies.getObject('sk1');
   var prevPage = $cookies.getObject('plr');
   if (!datas)
@@ -2776,11 +2766,6 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
     });
   }
 
-  $('#luarManado').click(function(){
-    $('#nik').val(null);
-    $('#nama').val(null);
-  });
-
   $('#nik_luar').on('keyup', function(){
     var isi = $(this).val()
     if (isi == '' || isi == null)
@@ -2927,7 +2912,7 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
           plr_alamat : $scope.alamat,
           plr_org_manado : 0
         }
-        $cookies.getObject('plr', data);
+        $cookies.putObject('plr', data);
         window.location.replace("pendaftaran.html#!/halaman6")
       }
     }
@@ -2988,7 +2973,7 @@ app.controller('ayah', function($scope, data, $cookies, $http){
       var val = resp.data.data;
       if (val.JENIS_KLMIN == '2')
       {
-        $('.notifikasi-body').notifikasi('Pemilik NIK bukan laki-laki', 5000);
+        $('.notifikasi').notifikasi('Pemilik NIK bukan laki-laki', 5000);
       }
       else if (val != null)
       {
