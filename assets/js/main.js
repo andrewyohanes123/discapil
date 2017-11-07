@@ -1857,7 +1857,7 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
     $cookies.remove('sk2');
     $cookies.remove('id_provinsi');
     $cookies.remove('pernyataan');
-    // return false;
+    // return false
   })
 
   $scope.pdf = function()
@@ -3439,8 +3439,7 @@ app.controller('bayi', function($scope, data, $cookies, $http){
   });
 
   $('#tglLahir').flatpickr({
-    locale : "id",
-    dateFormat : "YYYY-MM-DD"
+    locale : "id"
   })
 
   $('#berat').on('keyup', function(){
