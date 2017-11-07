@@ -3328,7 +3328,8 @@ app.controller('bayi', function($scope, data, $cookies, $http){
         {
           $scope.jen_kel = 'Perempuan';
         }
-        date = new Date(data.TGL_LHR);
+        date = Date(data.TGL_LHR);
+        console.log(date);
         $scope.tglLahir = moment(date).format("YYYY-MM-DD");
       }
       else
