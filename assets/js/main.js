@@ -567,7 +567,7 @@ dash.controller('selesai', function($scope, $http){
     $('.modal').modalPopup('show', {
       titleBackground : "#14569a",
       titleFontColor : "white",
-      key : 8
+      key : 27
     });
 
     $('a.ng-binding').click(function(){
@@ -907,7 +907,7 @@ dash.controller('verif', function($scope, $http){
     $('.modal').modalPopup('show', {
       titleBackground : "#14569a",
       titleFontColor : "white",
-      key : 8
+      key : 27
     });
 
     $('a.ng-binding').click(function(){
@@ -1241,7 +1241,7 @@ dash.controller('blm_verif', function($scope, $http){
     $('.modal').modalPopup('show', {
       titleBackground : "#14569a",
       titleFontColor : "white",
-      key : 8
+      key : 27
     });
 
     $('a.ng-binding').click(function(){
@@ -1581,7 +1581,7 @@ dash.controller('listPendaftaran', function($scope, $http){
     $('.modal').modalPopup('show', {
       titleBackground : "#14569a",
       titleFontColor : "white",
-      key : 8
+      key : 27
     });
 
     $('a.ng-binding').click(function(){
