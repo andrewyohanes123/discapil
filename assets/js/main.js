@@ -934,6 +934,10 @@ dash.controller('blm_verif', function($scope, $http){
     {
       return false;
     }
+    else if ($scope.totalData == 0)
+    {
+      return false;
+    }
     else
     {
       $scope.order= data;
@@ -1010,13 +1014,13 @@ dash.controller('blm_verif', function($scope, $http){
     if ($scope.currentpage <= 0)
     {
       $scope.currentpage = 1;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
     else
     {
       $scope.currentpage--;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
   }
@@ -1026,13 +1030,13 @@ dash.controller('blm_verif', function($scope, $http){
     if ($scope.currentpage == $scope.totalHalaman)
     {
       $scope.currentpage = $scope.totalHalaman;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
     else
     {
       $scope.currentpage++;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
   }
@@ -1256,11 +1260,12 @@ dash.controller('blm_verif', function($scope, $http){
 dash.controller('listPendaftaran', function($scope, $http){
 
   $scope.batas = "5";
-  $scope.sort = "asc";
-  $scope.order = "no_kk"
+  $scope.sort = "desc";
+  $scope.order = "tanggal_pendaftaran"
   $scope.tgl = moment().startOf('month').format('YYYY-MM-DD');
   $scope.tgl2 = moment().endOf('month').format('YYYY-MM-DD');
   $scope.currentpage = 1;
+  $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
 
   $scope.updateKeterangan = function(id)
   {
@@ -1277,6 +1282,19 @@ dash.controller('listPendaftaran', function($scope, $http){
     });
   }
 
+  $scope.hapus = function(id_bayi)
+  {
+    $http.get(backendUrl + "/hapus_pendaftaran/" + id_bayi).then(function(resp){
+      var status = resp.data.status;
+      var data = resp.data.data;
+      if (status)
+      {
+        $('.notifikasi').notifikasi(data, 3500);
+        $scope.getDaftar();
+      }
+    })
+  }
+
   $('tr th').click(function(){
     var data = $(this).data('order');
     $scope.order= data;
@@ -1291,8 +1309,6 @@ dash.controller('listPendaftaran', function($scope, $http){
 
     $scope.getDaftar();
   });
-
-  $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
 
   $scope.getDaftar = function() {
     $('.loading').loadingMsg('show', 'Loading...');
@@ -1352,13 +1368,13 @@ dash.controller('listPendaftaran', function($scope, $http){
     if ($scope.currentpage <= 0)
     {
       $scope.currentpage = 1;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
     else
     {
       $scope.currentpage--;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
   }
@@ -1368,13 +1384,13 @@ dash.controller('listPendaftaran', function($scope, $http){
     if ($scope.currentpage == $scope.totalHalaman)
     {
       $scope.currentpage = $scope.totalHalaman;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
     else
     {
       $scope.currentpage++;
-      var offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+      $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
       $scope.getDaftar()
     }
   }
@@ -2003,7 +2019,7 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
     doc.text(1.8, 14/10, ":");
     // doc.text(1.8, 15.5/10, ":");
     //
-    doc.text(2, 8/10, $scope.nomor_daftar);
+    doc.text(2, 8/10, $scope.nomor_daftar + "");
     doc.text(2, 9.5/10, $scope.data.no_kk);
     doc.text(2, 11/10, $scope.data.nama_kepala_keluarga);
     doc.text(2, 12.5/10, $scope.data.nama);
@@ -2539,15 +2555,20 @@ app.controller('saksi2', function($scope, data, $cookies, $http){
           sk_nik2 : $scope.nik_luar,
           sk_nama2 : $scope.nama_lengkap,
           sk_jenis_kelamin2 : $scope.jen_kelamin,
-          sk_tanggal_lahir2 : $scope.tglLahir,
-          sk_pekerjaan2 : $scope.pekerjaan,
-          sk_alamat2 : $scope.alamat,
+          sk_tanggal_lahir2 : $('#tglLahir').val(),
+          sk_pekerjaan2 : $('#pekerjaan').val(),
+          sk_alamat2 : $('#alamat').val(),
           sk_org_manado2 : 0
         }
         $cookies.putObject('sk2', data);
         window.location.replace('pendaftaran.html#!/persetujuan');
       }
     }
+  });
+
+  $('#tglLahir').flatpickr({
+    locale : "id",
+    maxDate : moment().format('YYYY-MM-DD')
   });
   // console.log(data.datepickerSetting());
   $('#tanggal').DateTimePicker();
@@ -2564,6 +2585,15 @@ app.controller('saksi1', function($scope, data, $cookies, $http){
       $('#nama').val('');
       $('#nama').removeClass('input-success');
     }
+  });
+
+  $('form').submit(function(e){
+    e.preventDefault();
+  });
+
+  $('#tglLahir').flatpickr({
+    locale : "id",
+    maxDate : moment().format('YYYY-MM-DD')
   });
 
   var datas = $cookies.getObject('sk1');
@@ -2591,6 +2621,9 @@ app.controller('saksi1', function($scope, data, $cookies, $http){
       $scope.jen_kelamin = datas.sk_jenis_kelamin1;
       $scope.pekerjaan = datas.sk_pekerjaan1;
       $scope.alamat = datas.sk_alamat1;
+      $('#tglLahir').val($scope.tglLahir);
+      $('#pekerjaan').val($scope.pekerjaan);
+      $('#alamat').val($scope.alamat);
     }
     else
     {
@@ -2707,10 +2740,10 @@ app.controller('saksi1', function($scope, data, $cookies, $http){
         var data = {
           sk_nik1 : $scope.nik_luar,
           sk_nama1 : $scope.nama_lengkap,
-          sk_tanggal_lahir1 : $scope.tglLahir,
-          sk_pekerjaan1 : $scope.pekerjaan,
+          sk_tanggal_lahir1 : $('#tglLahir').val(),
+          sk_pekerjaan1 : $('#pekerjaan').val(),
           sk_jenis_kelamin1 : $scope.jen_kelamin,
-          sk_alamat1 : $scope.alamat,
+          sk_alamat1 : $('#alamat').val(),
           sk_org_manado1 : 0
         }
         $cookies.putObject('sk1', data);
@@ -2734,6 +2767,15 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
     }
   });
 
+  $('#tanggal_lahir').flatpickr({
+    locale : "id",
+    maxDate : moment().format('YYYY-MM-DD')
+  });
+
+  $('form').submit(function(e){
+    e.preventDefault();
+  })
+
   var datas = $cookies.getObject('plr');
   var prevPage = $cookies.getObject('ayah');
   if (!datas)
@@ -2755,6 +2797,9 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
       $scope.jen_kelamin = datas.plr_jenis_kelamin;
       $scope.pekerjaan = datas.plr_pekerjaan;
       $scope.alamat = datas.plr_alamat;
+      $('#tanggal_lahir').val($scope.tanggal_lahir);
+      $('#pekerjaan').val($scope.pekerjaan);
+      $('#alamat').val($scope.alamat);
     }
     else
     {
@@ -2930,15 +2975,15 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
         $('#nama_pelapor').addClass('input-error');
         $('#nama_pelapor').focus();
       }
-      else if (tanggal == '' || tanggal == null)
-      {
-        $('.notifikasi').notifikasi('Pilih tanggal lahir', 4500);
-        $('#tanggal_lahir').addClass('input-error');
-      }
       else if (pekerjaan == '' || pekerjaan == null)
       {
         $('.notifikasi').notifikasi('Masukkan pekerjaan', 3000);
         $('#pekerjaan').addClass('input-error');
+      }
+      else if (tanggal == '' || tanggal == null)
+      {
+        $('.notifikasi').notifikasi('Pilih tanggal lahir', 4500);
+        $('#tanggal_lahir').addClass('input-error');
       }
       else if (alamat == '' || alamat == null)
       {
@@ -2950,10 +2995,10 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
         var data = {
           plr_nik : $scope.nik_pelapor,
           plr_nama : $scope.nama,
-          plr_tanggal_lahir : $scope.tanggal_lahir,
-          plr_pekerjaan : $scope.pekerjaan,
+          plr_tanggal_lahir : $('#tanggal_lahir').val(),
+          plr_pekerjaan : $('#pekerjaan').val(),
           plr_jenis_kelamin : $scope.jen_kelamin,
-          plr_alamat : $scope.alamat,
+          plr_alamat : $('#alamat').val(),
           plr_org_manado : 0
         }
         $cookies.putObject('plr', data);
@@ -3379,16 +3424,13 @@ app.controller('no_kk', function($scope, data, $cookies, $http){
 });
 
 app.controller('bayi', function($scope, data, $cookies, $http){
-  var prevPage = $cookies.getObject('no_kk');
-
-  if (!prevPage)
-  {
-    window.location.replace('#!/');
-  }
   $scope.tempat = 'RS/RB';
   $scope.jen_kelahiran = "Tunggal";
   $scope.kelahiran_ke = "Pertama";
   $scope.penolong_kelahiran = "Dokter";
+  $scope.pukul = "00:00";
+  $scope.berat = 0;
+  $scope.panjang = 0;
 
   // nama : $scope.nama,
   // jenis_kelamin : $scope.jen_kel,
@@ -3449,9 +3491,6 @@ app.controller('bayi', function($scope, data, $cookies, $http){
     });
   }
 
-  $('#berat').ForceNumericOnly();
-  $('#panjang').ForceNumericOnly();
-
   $('#prov').change(function(e){
     var prov = $(this).find(':selected').data('prov');
     $scope.getKabKota(prov);
@@ -3493,9 +3532,12 @@ app.controller('bayi', function($scope, data, $cookies, $http){
     $scope.kabupatenkota = datas.kotakab_kelahiran;
     $scope.jen_kelahiran = datas.jenis_kelahiran;
     $scope.penolong_kelahiran = datas.penolong_kelahiran;
-    $scope.berat_bayi = datas.berat;
-    $scope.panjang_bayi = datas.panjang;
-    $scope.jam = datas.waktu_lahir;
+    $scope.berat = datas.berat;
+    $scope.panjang = datas.berat;
+    $scope.pukul = datas.waktu_lahir;
+    $('#berat').val(datas.berat);
+    $('#panjang').val(datas.panjang);
+    $('#jam').val(datas.waktu_lahir);
   }
   // $scope.jam = ''
   $('#tanggal').DateTimePicker(data.datepickerSetting());
@@ -3550,7 +3592,7 @@ app.controller('bayi', function($scope, data, $cookies, $http){
 
   $('#tglLahir').flatpickr({
     locale : "id"
-  })
+  });
 
   $('#berat').on('keyup', function(){
     var ini = $(this).val();
@@ -3649,9 +3691,9 @@ app.controller('bayi', function($scope, data, $cookies, $http){
         jenis_kelahiran : $scope.jen_kelahiran,
         kelahiran_ke : $scope.kelahiran_ke,
         penolong_kelahiran : $scope.penolong_kelahiran,
-        berat : $scope.berat_bayi,
-        panjang : $scope.panjang_bayi,
-        waktu_lahir : $scope.jam
+        berat : $('#berat').val(),
+        panjang : $('#panjang').val(),
+        waktu_lahir : $('#jam').val()
       }
       $cookies.putObject('bayi', data);
       window.location.replace(baseUrl + "#!/halaman3");

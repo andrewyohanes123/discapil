@@ -53,7 +53,7 @@
         <h5 id="tgl_alert" class="input-alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih tanggal</h5>
         <div id="tanggal"></div>
         <label for="">Pukul</label>
-        <input ng-model="jam" id="jam" type="text" data-field="time" class="input" placeholder="Pukul" name="" value="">
+        <input type="text" data-field="time" class="input" id="jam" ng-model="pukul" name="" value="">
         <h5 class="input-alert" id="jam_alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih jam</h5>
         <label for="">Jenis Kelahiran</label>
         <select ng-model="jen_kelahiran" class="input" name="">
@@ -80,12 +80,12 @@
         </select>
         <label for="">Berat bayi</label>
         <div class="input-group">
-          <input ng-model="berat_bayi" id="berat" type="text" class="input" placeholder="Berat bayi" name="" value="">
-          <span class="input-addon">Kg</span>
+          <input type="number" id="berat" ng-model="berat" class="input" name="" value="">
+          <span class="input-addon">Gr</span>
         </div>
         <label for="">Panjang bayi</label>
         <div class="input-group">
-          <input ng-model="panjang_bayi" id="panjang" type="text" class="input" placeholder="Panjang bayi" name="" value="">
+          <input type="number" id="panjang" ng-model="panjang" class="input" name="" value="">
           <span class="input-addon">Cm</span>
         </div>
         <hr>
