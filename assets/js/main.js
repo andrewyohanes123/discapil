@@ -2090,12 +2090,6 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
     });
   }
 
-  var data1 = $cookies.getObject('no_kk');
-  var data2 = $cookies.getObject('bayi');
-  var data3 = $cookies.getObject('pernyataan');
-
-  $scope.data = Object.assign(data1, data2, data3);
-
   $('#nomor_telp').blur(function(){
     var data = {
       p_no_telfon : $scope.nomor_telp,
@@ -2128,7 +2122,6 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
 
   $('a.ng-binding').click(function(){
     var src = $(this).attr('href');
-    console.log(src);
     $('.img-modal').imgModal(src);
     return false;
   })
@@ -2257,6 +2250,13 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
       p_alamat : $scope.alamat,
       p_pernyataan : $scope.pernyataan
     }
+
+    // var data1 = $cookies.getObject('no_kk');
+    // var data2 = $cookies.getObject('bayi');
+    // var data3 = $cookies.getObject('pernyataan');
+    //
+    // $scope.data = Object.assign(data1, data2, data3);
+
     var no_kk = $cookies.getObject('no_kk');
     var bayi = $cookies.getObject('bayi');
     var ibu = $cookies.getObject('ibu');
@@ -2264,7 +2264,15 @@ app.controller('persetujuan', function($scope, data, $cookies, $http, Upload){
     var plr = $cookies.getObject('plr');
     var sk1 = $cookies.getObject('sk1');
     var sk2 = $cookies.getObject('sk2');
-    var data = Object.assign(no_kk, bayi, ibu, ayah, plr, sk1, sk2, pernyataan);
+    if (!ayah)
+    {
+      var data = Object.assign(no_kk, bayi, ibu, plr, sk1, sk2, pernyataan);
+    }
+    else
+    {
+      var data = Object.assign(no_kk, bayi, ibu, ayah, plr, sk1, sk2, pernyataan);
+    }
+    $scope.data = data;
     var req = {
       method: "POST",
       url: backendUrl + "/simpan_data_awal",
@@ -2344,9 +2352,12 @@ app.controller('saksi2', function($scope, data, $cookies, $http){
       $scope.nik_luar = datas.sk_nik2;
       $scope.nama_lengkap = datas.sk_nama2;
       $scope.tglLahir = datas.sk_nama2;
+      $('#tglLahir').val($scope.tglLahir);
       $scope.jen_kelamin = datas.sk_jenis_kelamin2;
       $scope.pekerjaan = datas.sk_pekerjaan2;
+      $('#pekerjaan').val($scope.pekerjaan);
       $scope.alamat = datas.sk_alamat2;
+      $('#alamat').val($scope.alamat);
     }
     else
     {
@@ -2813,7 +2824,6 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
     window.location.replace('#!/halaman4');
   }
 
-  $('#tanggal').DateTimePicker(data.datepickerSetting());
   $scope.jen_kelamin = 'Laki-laki';
   $('#nik').on('blur', function(){
     var nik = $(this).val();
@@ -3002,7 +3012,7 @@ app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
           plr_org_manado : 0
         }
         $cookies.putObject('plr', data);
-        window.location.replace("pendaftaran.html#!/halaman6")
+        window.location.replace("pendaftaran.html#!/halaman6");
       }
     }
   })
@@ -3183,6 +3193,7 @@ app.controller('ibu', function($scope, data, $cookies, $http){
   else
   {
     $scope.nama_ibu = datas.nama_ibu;
+    // $('#')
     $scope.nik = datas.nik_ibu
   }
 
