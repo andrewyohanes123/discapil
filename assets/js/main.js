@@ -3193,7 +3193,6 @@ app.controller('ibu', function($scope, data, $cookies, $http){
   else
   {
     $scope.nama_ibu = datas.nama_ibu;
-    // $('#')
     $scope.nik = datas.nik_ibu
   }
 
