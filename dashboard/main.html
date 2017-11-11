@@ -36,43 +36,46 @@
         </div>
       </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th data-order="no_kk">Nomor KK</th>
-          <th data-order="nama">Nama Bayi</th>
-          <th data-order="no_antrian">No Pendaftaran</th>
-          <th data-order="tanggal_lahir">Tanggal lahir</th>
-          <th data-order="tanggal_pendaftaran">Tanggal pendaftaran</th>
-          <th data-order="p_no_telfon">Nomor Telp</th>
-          <th>Detail/Verifikasi</th>
-          <th>Hapus</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-show="totalData == 0">
-          <td colspan="9" style="text-align: center;">Tidak ada pendaftaran pada tanggal <b>{{ tgl }}</b> s/d <b>{{ tgl2 }}</b></td>
-        </tr>
-        <tr ng-repeat="list in daftar">
-          <!-- <td colspan="6"><center>Tidak ada pendaftaran</center></td> -->
-          <td>{{ daftar.indexOf(list) + 1 }}</td>
-          <td>{{ list.no_kk }}</td>
-          <td>{{ list.nama }}</td>
-          <td>{{ list.no_antrian }}</td>
-          <td>{{ list.tanggal_lahir }}</td>
-          <td>{{ list.tanggal_pendaftaran }}</td>
-          <td>{{ list.p_no_telfon }}</td>
-          <td>
-            <button type="button" ng-click="detail(list.id_bayi)" class="btn btn-check" name="button">Detail</button>
-            <button type="button" ng-disabled="list.approved == 1" ng-click="verifikasi(list.id_bayi)" class="btn btn-check" name="button">Verifikasi</button>
-          </td>
-          <td>
-            <button type="button" class="btn btn-hapus" ng-click="hapus(list.id_bayi)" name="button">Hapus</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th data-order="no_kk">Nomor KK</th>
+            <th data-order="nama">Nama Bayi</th>
+            <th data-order="no_antrian">No Pendaftaran</th>
+            <th data-order="tanggal_lahir">Tanggal lahir</th>
+            <th data-order="tanggal_pendaftaran">Tanggal pendaftaran</th>
+            <th data-order="p_no_telfon">Nomor Telp</th>
+            <th>Detail/Verifikasi</th>
+            <th>Hapus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-show="totalData == 0">
+            <td colspan="9" style="text-align: center;">Tidak ada pendaftaran pada tanggal <b>{{ tgl }}</b> s/d <b>{{ tgl2 }}</b></td>
+          </tr>
+          <tr ng-repeat="list in daftar">
+            <!-- <td colspan="6"><center>Tidak ada pendaftaran</center></td> -->
+            <td>{{ daftar.indexOf(list) + 1 }}</td>
+            <td>{{ list.no_kk }}</td>
+            <td>{{ list.nama }}</td>
+            <td>{{ list.no_antrian }}</td>
+            <td>{{ list.tanggal_lahir }}</td>
+            <td>{{ list.tanggal_pendaftaran }}</td>
+            <td>{{ list.p_no_telfon }}</td>
+            <td>
+              <button type="button" ng-click="detail(list.id_bayi)" class="btn btn-check" name="button">Detail</button>
+              <button type="button" ng-disabled="list.approved == 1" ng-click="verifikasi(list.id_bayi)" class="btn btn-check" name="button">Verifikasi</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-edit" ng-click="getData(list.id_bayi)" name="button">Edit</button>
+              <button type="button" class="btn btn-hapus" ng-click="hapus(list.id_bayi)" name="button">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="kotak-body">
       <button type="button" class="btn btn-prev" ng-disabled="currentpage == 1" ng-click="prev()" name="button">Sebelumnya</button>
       <button type="button" class="btn btn-prev" ng-disabled="currentpage == totalHalaman || totalHalaman == 0" ng-click="pindahHalaman()" name="button">Berikutnya</button>
@@ -394,6 +397,184 @@
       </div>
     </div>
     <div class="modal-footer">
+    </div>
+  </div>
+</div>
+<div id="editModal" class="modal">
+  <div class="modal-window modal-wide">
+    <div class="modal-titlebar">
+      <span class="close">
+        <i class="fa fa-times fa-lg"></i>
+      </span>
+      <p class="title"><i class="fa fa-list fa-lg"></i>&nbsp;{{ data.nama }} | {{ data.no_kk }}</p>
+    </div>
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-6">
+          <div class="collapse">
+            <div class="head blue">
+              <p><i class="fa fa-users fa-lg"></i>&nbsp;Keluarga</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <label for="">Nomor KK</label>
+              <div class="input-group">
+                <input type="text" class="input" ng-model="data.no_kk" placeholder="NIK">
+                <div class="input-addon-btn">
+                  <button type="button" class="btn btn-check" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+                </div>
+              </div>
+              <label for="">Nama Kepala Keluarga</label>
+              <input type="text" class="input" placeholder="Nama Ayah" ng-model="data.nama_kepala_keluarga" name="" value="">
+            </div>
+          </div>
+          <div class="collapse">
+            <div class="head red">
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Ayah</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <label for="">NIK</label>
+              <div class="input-group">
+                <input type="text" class="input" ng-model="data.nik_ayah" placeholder="NIK">
+                <div class="input-addon-btn">
+                  <button type="button" class="btn btn-check" ng-click="cekAyah(data.nik_ayah)" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+                </div>
+              </div>
+              <label for="">Nama</label>
+              <input type="text" class="input" placeholder="Nama Ayah" id="nama_ayah" ng-model="data.nama_ayah" name="" value="">
+            </div>
+          </div>
+          <div class="collapse">
+            <div class="head red">
+              <p><i class="fa fa-user fa-lg"></i>&nbsp;Ibu</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <label for="">NIK</label>
+              <div class="input-group">
+                <input type="text" class="input" ng-model="data.nik_ibu" placeholder="NIK">
+                <div class="input-addon-btn">
+                  <button type="button" class="btn btn-check" ng-click="cekIbu(data.nik_ibu)" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+                </div>
+              </div>
+              <label for="">Nama</label>
+              <input type="text" class="input" placeholder="Nama Ayah" ng-model="data.nama_ibu" name="" value="">
+            </div>
+          </div>
+          <div class="collapse">
+            <div class="head blue">
+              <p><i class="fa fa-book fa-lg"></i>&nbsp;Data Keluarga</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <label for="">Nomor telepon</label>
+              <input type="text" class="input" ng-model="data.p_no_telfon" name="" value="" placeholder="Nomor telepon"/>
+              <label for="">Alamat</label>
+              <input type="text" class="input" placeholder="Alamat" ng-model="data.p_alamat" name="" value=""/>
+              <label for="">Pernyataan</label>
+              <textarea name="name" class="input" rows="6" cols="30" ng-model="data.p_pernyataan"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="collapse">
+            <div class="head turquoise">
+              <p><i class="fa fa-h-square fa-lg"></i>&nbsp;Bayi/Anak</p>
+              <span class="collapse-icon"><i class="fa fa-angle-down fa-lg"></i></span>
+            </div>
+            <div class="collapse-body">
+              <label for="">NIK</label>
+              <div class="input-group">
+                <input type="text" class="input" ng-model="data.nik" placeholder="NIK">
+                <div class="input-addon-btn">
+                  <button type="button" class="btn btn-check" ng-click="cekAnak(data.nik)" name="button"><i class="fa fa-check fa-lg"></i>&nbsp;Cek</button>
+                </div>
+              </div>
+              <label for="">Nama Lengkap</label>
+              <input type="text" class="input" placeholder="Nama Ayah" ng-model="data.nama" name="" value="">
+              <label for="">Jenis Kelamin</label>
+              <select class="input" ng-model="data.jenis_kelamin" name="">
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+              <label for="">Tempat dilahirkan</label>
+              <select ng-model="data.tempat_dilahirkan" id="tempat" class="input" name="">
+                <option value="RS/RB">RS/RB</option>
+                <option value="Puskesmas">Puskesmas</option>
+                <option value="Polindes">Polindes</option>
+                <option value="Rumah">Rumah</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+              <label for="">Tempat Kelahiran</label>
+              <div class="input-group">
+                <div class="input-addon">
+                  Provinsi
+                </div>
+                <select class="input" id="prov" ng-model="data.prov_kelahiran" name="">
+                  <option value="">Pilih</option>
+                  <option ng-repeat="daftar in list" value="{{ daftar.NAMA_PROP }}" data-prov="{{ daftar.NO_PROP }}">{{ daftar.NAMA_PROP }}</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <div class="input-addon">
+                  Kabupaten/Kota
+                </div>
+                <select class="input" ng-model="data.kotakab_kelahiran" name="">
+                  <option value="">Pilih</option>
+                  <option ng-repeat="daftarKab in listkab" value="{{ daftarKab.NAMA_KAB }}">{{ daftarKab.NAMA_KAB }}</option>
+                </select>
+              </div>
+              <input type="text" name="" value="" class="input" placeholder="Tempat kelahiran" ng-model="data.tempat_kelahiran">
+              <label for="">Tanggal lahir</label>
+              <input type="text" class="input" placeholder="Tanggal Lahir" id="tanggal" ng-model="data.tanggal_lahir" name="" value=""/>
+              <label for="">Waktu lahir</label>
+              <input type="text" class="input" data-field="time" placeholder="Waktu lahir" ng-model="data.waktu_lahir" name="" value="">
+              <label for="">Jenis Kelahiran</label>
+              <select ng-model="data.jenis_kelahiran" class="input" name="">
+                <option value="Tunggal">Tunggal</option>
+                <option value="Kembar 2">Kembar 2</option>
+                <option value="Kembar 3">Kembar 3</option>
+                <option value="Kembar 4">Kembar 4</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+              <label for="">Kelahiran ke</label>
+              <select ng-model="data.kelahiran_ke" class="input" name="">
+                <option value="Pertama">Pertama</option>
+                <option value="Kedua">Kedua</option>
+                <option value="Ketiga">Ketiga</option>
+                <option value="Keempat">Keempat</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+              <label for="">Penolong kelahiran</label>
+              <select ng-model="data.penolong_kelahiran" class="input" name="">
+                <option value="Dokter">Dokter</option>
+                <option value="Bidan/Perawat">Bidan/Perawat</option>
+                <option value="Dukun">Dukun</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+              <label for="">Berat bayi</label>
+              <div class="input-group">
+                <input type="text" id="berat" ng-model="data.berat" class="input" name="" value="">
+                <span class="input-addon">Gr</span>
+              </div>
+              <label for="">Panjang bayi</label>
+              <div class="input-group">
+                <input type="text" id="panjang" ng-model="data.panjang" class="input" name="" value="">
+                <span class="input-addon">Cm</span>
+              </div>
+            </div>
+            <div id="jam">
+            </div>
+          </div>
+        </div>
+        <!-- Row -->
+      </div>
+      <!--  -->
+      <!--  -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" ng-click="editData()" class="btn btn-edit" name="button">Simpan</button>
     </div>
   </div>
 </div>

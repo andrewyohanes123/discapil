@@ -25,7 +25,7 @@
     },config)
     if (mode == 'show')
     {
-      $('.modal').show();
+      $(this).show();
       $('.modal-titlebar').css('background', setting.titleBackground);
       $('.modal-titlebar .title').css('color', setting.titleFontColor)
       $('body').css('overflow-y', 'hidden');
@@ -70,7 +70,7 @@
     {
       $('.modal-window').css('animation', 'modal-out 750ms forwards');
       $('body').css('overflow', 'auto');
-      $('#modal').fadeOut();
+      $('.modal').fadeOut();
       setTimeout(function(){
         $('.modal-window').css('animation', 'modal-in 750ms forwards');
       }, 500);

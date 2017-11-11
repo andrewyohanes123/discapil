@@ -1257,7 +1257,9 @@ dash.controller('blm_verif', function($scope, $http){
   $scope.getDaftar();
 })
 
-dash.controller('listPendaftaran', function($scope, $http){
+dash.controller('listPendaftaran', function($scope, $http, data){
+
+  $('#jam').DateTimePicker(data.datepickerSetting());
 
   $scope.batas = "5";
   $scope.sort = "desc";
@@ -1266,6 +1268,92 @@ dash.controller('listPendaftaran', function($scope, $http){
   $scope.tgl2 = moment().endOf('month').format('YYYY-MM-DD');
   $scope.currentpage = 1;
   $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
+
+  $(document).ready(function(){
+    $('.head').on('click',function(){
+      $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
+      $(this).siblings('div.collapse-body').slideToggle();
+      $(this).siblings('div.containers').slideToggle();
+    });
+  });
+
+  $scope.cekIbu = function(nik)
+  {
+    // var nik = $(this).val();
+    $http.get(backendUrl + "/ambil_penduduk/" + nik).then(function(resp){
+      var val = resp.data.data;
+      var status = resp.data.status;
+
+      if (val.JENIS_KLMIN != "2")
+      {
+        $('.notifikasi').notifikasi('Pemilik NIK bukan perempuan');
+      }
+      else if (val != null)
+      {
+        $scope.data.nama_ibu = val.NAMA_LGKP;
+      }
+      else
+      {
+        $('#nik').addClass('input-error');
+        $('.notifikasi').notifikasi('NIK tidak valid', 3000);
+      }
+    })
+  }
+
+  $scope.cekAyah = function(nik)
+  {
+    // var nik = $(this).val();
+    $http.get(backendUrl + "/ambil_penduduk/" + nik).then(function(resp){
+      var val = resp.data.data;
+      var status = resp.data.status;
+      if (val.JENIS_KLMIN != "1")
+      {
+        $('.notifikasi').notifikasi('Pemilik NIK bukan laki-laki')
+      }
+      else if (val != null)
+      {
+        $scope.data.nama_ayah = val.NAMA_LGKP;
+      }
+      else
+      {
+        $('#nik').addClass('input-error');
+        $('.notifikasi').notifikasi('NIK tidak valid', 3000);
+      }
+    })
+  }
+
+  $scope.cekAnak = function(nik)
+  {
+    // var nik = $(this).val();
+    $http.get(backendUrl + "/ambil_penduduk/" + nik).then(function(resp){
+      var val = resp.data.data;
+      var status = resp.data.status;
+      if (val != null)
+      {
+        $scope.data.nama = val.NAMA_LGKP;
+      }
+      else
+      {
+        $('#nik').addClass('input-error');
+        $('.notifikasi').notifikasi('NIK tidak valid', 3000);
+      }
+    })
+  }
+
+  $scope.getProvinsi = function()
+  {
+    $http.get(backendUrl + "/ambil_provinsi").then(function(resp){
+      var provinsi = resp.data.data;
+      $scope.list = provinsi;
+    })
+  }
+
+  $scope.getKabKota = function(prov)
+  {
+    $http.get(backendUrl + "/ambil_kotakab/" + prov).then(function(resp){
+      $scope.listkab = resp.data.data;
+    });
+  }
 
   $scope.updateKeterangan = function(id)
   {
@@ -1280,6 +1368,54 @@ dash.controller('listPendaftaran', function($scope, $http){
       $('.loading').loadingMsg('hide', 'Mengirim');
       $('.notifikasi').notifikasi(pesan, 3000);
     });
+  }
+
+  $('#prov').change(function(){
+    var prov = $(this).find(':selected').data('prov');
+    $scope.getKabKota(prov);
+  })
+
+  $scope.getData = function(id)
+  {
+    $scope.getProvinsi();
+    $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id).then(function(resp){
+      var hasil = resp.data.data;
+      $scope.data = hasil;
+      // $scope.getKabKota()
+      $('#editModal').modalPopup('show', {
+        titleBackground : "#303030",
+        titleFontColor : "#ffffff",
+        keyboardDetect : false,
+        backgroundClick : false
+      });
+
+      $('#tanggal').flatpickr({
+        locale : "id",
+        maxDate : moment().add(1, 'days').format('YYYY-MM-DD')
+      });
+
+      // $('#jam').DateTimePicker(data.datepickerSetting());
+      setTimeout(function(){
+        var prov = $('#prov').find(':selected').data('prov');
+        $scope.getKabKota(prov);
+      },200);
+    });
+  }
+
+  $scope.editData = function()
+  {
+    $http.post(backendUrl + "/edit_pendaftaran", $scope.data).then(function(resp){
+      // console.log(resp.data);
+      if (resp.data.status)
+      {
+        $('.notifikasi').notifikasi(resp.data.data, 3000);
+        $('#editModal').modalPopup('hide');
+      }
+      else
+      {
+        $('.notifikasi').notifikasi(resp.data.data, 3000);
+      }
+    })
   }
 
   $scope.hapus = function(id_bayi)
@@ -1455,12 +1591,6 @@ dash.controller('listPendaftaran', function($scope, $http){
     $scope.getDaftar()
   });
 
-  $('.head').on('click', function(){
-    $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
-    $(this).siblings('div.collapse-body').slideToggle();
-    $(this).siblings('div.containers').slideToggle();
-  });
-
   $scope.detail = function(id_bayi) {
     moment.locale('id');
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
@@ -1594,7 +1724,7 @@ dash.controller('listPendaftaran', function($scope, $http){
       }
     });
 
-    $('.modal').modalPopup('show', {
+    $('#modal').modalPopup('show', {
       titleBackground : "#14569a",
       titleFontColor : "white",
       key : 27
@@ -1607,7 +1737,7 @@ dash.controller('listPendaftaran', function($scope, $http){
   }
 
   $scope.getDaftar();
-})
+});
 
 dash.controller('verifikasi', function($scope, $http, $cookies){
   $('#tgl').val(moment().startOf('month').format("YYYY-MM-DD"));
@@ -3746,24 +3876,6 @@ app.controller('login', function($scope, $http){
   }
 })
 
-app.factory('dataPenduduk', function($http){
-  var dataPenduduk = {};
-
-  dataPenduduk.getPendudukByNIK = function(url) {
-    var hasil;
-    return $http.get(url).then(function(resp){
-       return hasil = resp.data;
-    });
-
-    return hasil;
-  };
-
-  dataPenduduk.postData = function(url, obj) {
-    return $http.post(url, obj);
-  };
-  return dataPenduduk;
-})
-
 app.controller('form-title', function($scope, $location){
   $scope.next = function(halamanBerikut)
   {
@@ -3772,6 +3884,24 @@ app.controller('form-title', function($scope, $location){
 });
 
 app.service('data', function(){
+  this.datepickerSetting = function()
+  {
+    var setting = {
+      shortDayNames : ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+      fullDayNames : ["Minggu", "Senin", "Selasa", "Rabu", "Jumat", "Sabtu"],
+      shortMonthNames : ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ag", "Sep", "Okt", "Nov", "Des"],
+      fullMonthNames : ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+      titleContentDate : "Pilih tanggal",
+      titleContentTime : "Pilih jam",
+      setButtonContent : "Pilih",
+      clearButtonContent : "Reset",
+      dateFormat : "yyyy-MM-dd"
+    }
+    return setting;
+  }
+});
+
+dash.service('data', function(){
   this.datepickerSetting = function()
   {
     var setting = {
@@ -3858,11 +3988,17 @@ $(document).ready(function(){
     // return false;
   });
 
-  $(document).on('click', '.head',function(){
-    $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
-    $(this).siblings('div.collapse-body').slideToggle();
-    $(this).siblings('div.containers').slideToggle();
-  });
+  // $(document).on('click', '.head',function(){
+  //   $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
+  //   $(this).siblings('div.collapse-body').slideToggle();
+  //   $(this).siblings('div.containers').slideToggle();
+  // });
+
+  // $('.head').click(function(){
+  //   $(this).children('span.collapse-icon').children('i.fa').toggleClass('icon-up');
+  //   $(this).siblings('.collapse-body').slideToggle();
+  //   $(this).siblings('.containers').slideToggle();
+  // });
 
   $('#cek_status').click(function(){
     window.location.replace('cek_status.html');

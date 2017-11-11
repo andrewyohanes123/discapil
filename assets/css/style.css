@@ -364,7 +364,6 @@ code:after {
   padding: 5px 15px;
   margin: 0 auto;
   border: #fafafa 1px solid;
-  display: none;
 }
 
 /* Navbar */
@@ -1427,7 +1426,7 @@ a.btn.btn-next {
 
 /* -- Modal window -- */
 
-#modal {
+#modal, #editModal {
   display: none;
 }
 
@@ -1440,6 +1439,7 @@ a.btn.btn-next {
   left : 0;
   bottom : 0;
   overflow: auto;
+  /*display: none;*/
 }
 
 .modal-wide {
