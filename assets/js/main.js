@@ -9,9 +9,13 @@ dash.config(function($routeProvider){
   // $locationProvider.html5Mode(true);
   // $locationProvider.hashPrefix('');
   $routeProvider
-  .when('/', {
+  .when('/semua', {
     templateUrl : "dashboard/main.html",
     controller : "listPendaftaran"
+  })
+  .when('/dashboard', {
+    templateUrl : "dashboard/dash.html",
+    controller : "dash"
   })
   .when('/tidak_diverifikasi', {
     templateUrl : "dashboard/akte_verifikasi.html",
@@ -30,9 +34,22 @@ dash.config(function($routeProvider){
     controller : 'user'
   })
   .otherwise({
-    redirectTo : "/"
+    redirectTo : "/dashboard"
   })
 });
+
+dash.controller('dash', function($scope, $http){
+  $scope.getScore = function()
+  {
+    $http.get(backendUrl + "/ambil_jumlah_pendaftaran").then(function(resp){
+      $scope.val = resp.data.data;
+    })
+    // $http.get("http://popcash.net/world/go/142037/299028/aHR0cCUzQS8vaWxvbW9uLnBlLmh1Lw==").then(function(resp){
+    //   console.log(resp);
+    // })
+  }
+  $scope.getScore();
+})
 
 dash.controller('user', function($scope, $http){
   $scope.get = function(limit, offset, cari)
@@ -414,6 +431,7 @@ dash.controller('selesai', function($scope, $http){
     var tgl2 = $('#tgl2').val();
     var cari = $('#cari').val();
     var limit = $('#batas').val();
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar();
   })
@@ -421,6 +439,7 @@ dash.controller('selesai', function($scope, $http){
   $('#batas').change(function(){
     var limit = $(this).val();
     $scope.batas = limit;
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar()
   });
@@ -753,6 +772,7 @@ dash.controller('verif', function($scope, $http){
   $('#cari').keyup(function(){
     var cari = $('#cari').val();
     $scope.cari = cari;
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar();
   })
@@ -760,6 +780,7 @@ dash.controller('verif', function($scope, $http){
   $('#batas').change(function(){
     var limit = $(this).val();
     $scope.batas = limit;
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar()
   });
@@ -1092,6 +1113,7 @@ dash.controller('blm_verif', function($scope, $http){
     var tgl2 = $('#tgl2').val();
     var cari = $('#cari').val();
     var limit = $('#batas').val();
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar();
   })
@@ -1099,6 +1121,7 @@ dash.controller('blm_verif', function($scope, $http){
   $('#batas').change(function(){
     var limit = $(this).val();
     $scope.batas = limit;
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar()
   });
@@ -1580,6 +1603,7 @@ dash.controller('listPendaftaran', function($scope, $http, data){
     var tgl2 = $('#tgl2').val();
     var cari = $('#cari').val();
     var limit = $('#batas').val();
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar();
   })
@@ -1587,6 +1611,7 @@ dash.controller('listPendaftaran', function($scope, $http, data){
   $('#batas').change(function(){
     var limit = $(this).val();
     $scope.batas = limit;
+    $scope.currentpage = 1;
     $scope.offset = ($scope.currentpage - 1) * (parseInt($scope.batas));
     $scope.getDaftar()
   });

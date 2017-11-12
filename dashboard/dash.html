@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="kotak">
+    <div class="head">
+      <p class="head-title"><i class="fa fa-dashboard fa-lg"></i>&nbsp;Dashboard</p>
+    </div>
+    <div class="kotak-body">
+      <div class="row">
+        <div class="col-3">
+          <div class="score">
+            <div class="score-icon">
+              <i class="fa fa-list-ul fa-lg"></i>
+            </div>
+            <div class="score-body">
+              <h4 class="category">Semua laporan</h4>
+              <h3 class="value">{{ val.semua }}</h3>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="col-3">
+          <div class="score green">
+            <div class="score-icon">
+              <i class="fa fa-check-circle fa-lg"></i>
+            </div>
+            <div class="score-body">
+              <h4 class="category">Selesai</h4>
+              <h3 class="value">{{ val.approved_selesai }}</h3>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="col-3">
+          <div class="score blue">
+            <div class="score-icon">
+              <i class="fa fa-wpforms fa-lg"></i>
+            </div>
+            <div class="score-body">
+              <h4 class="category">Diverifikasi</h4>
+              <h3 class="value">{{ val.approved_belum_selesai }}</h3>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="col-3">
+          <div class="score gray">
+            <div class="score-icon">
+              <i class="fa fa-list-ul fa-lg"></i>
+            </div>
+            <div class="score-body">
+              <h4 class="category">Belum verifikasi</h4>
+              <h3 class="value">{{ val.belum_approved }}</h3>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+</div>
