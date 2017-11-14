@@ -43,10 +43,7 @@ dash.controller('dash', function($scope, $http){
   {
     $http.get(backendUrl + "/ambil_jumlah_pendaftaran").then(function(resp){
       $scope.val = resp.data.data;
-    })
-    // $http.get("http://popcash.net/world/go/142037/299028/aHR0cCUzQS8vaWxvbW9uLnBlLmh1Lw==").then(function(resp){
-    //   console.log(resp);
-    // })
+    });
   }
   $scope.getScore();
   $('.submenu li a').removeClass('submenu-active');
@@ -474,7 +471,7 @@ dash.controller('selesai', function($scope, $http){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
 
-      if (hasil.nik == '' || hasil.nik == null)
+      if (hasil.nik == '' || hasil.nik == null || hasil.nik == "0")
       {
         $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
       }
@@ -829,7 +826,7 @@ dash.controller('verif', function($scope, $http){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
 
-      if (hasil.nik == '' || hasil.nik == null)
+      if (hasil.nik == '' || hasil.nik == null || hasil.nik == "0")
       {
         $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
       }
@@ -1184,7 +1181,7 @@ dash.controller('blm_verif', function($scope, $http){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
 
-      if (hasil.nik == '' || hasil.nik == null)
+      if (hasil.nik == '' || hasil.nik == null || hasil.nik == "0")
       {
         $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
       }
@@ -1695,7 +1692,7 @@ dash.controller('listPendaftaran', function($scope, $http, data){
     moment.locale('id');
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
       var hasil = resp.data.data;
-      if (hasil.nik == '' || hasil.nik == null)
+      if (hasil.nik == '' || hasil.nik == null || hasil.nik == "0")
       {
         $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
       }
