@@ -60,7 +60,7 @@
             <td>{{ user.mode }}</td>
             <td>
               <button type="button" ng-click="tambah_user(user.id_pengguna, user.nama, user.username, user.aktif,'Edit user', 'edit')" class="btn btn-edit" name="button"><i class="fa fa-edit fa-lg"></i>&nbsp;Edit</button>
-              <button type="button" ng-click="tambah_user(user.id_pengguna, user.nama, '', '', 'Hapus','hapus')" class="btn btn-hapus" name="button"><i class="fa fa-trash fa-lg"></i>&nbsp;Hapus</button>
+              <button type="button" ng-disabled="user.id_pengguna == current_user.id_pengguna" ng-click="tambah_user(user.id_pengguna, user.nama, '', '', 'Hapus','hapus')" class="btn btn-hapus" name="button"><i class="fa fa-trash fa-lg"></i>&nbsp;Hapus</button>
             </td>
           </tr>
         </tbody>
@@ -91,9 +91,9 @@
           Blokir
         </label>
         <input type="hidden" ng-model="id" name="" value="">
-        <select class="input" ng-model="blokir" name="">
-          <option value="0">Blokir</option>
+        <select ng-disabled="id == current_user.id_pengguna" class="input" ng-model="blokir" name="">
           <option value="1">Aktif</option>
+          <option value="0">Blokir</option>
         </select>
         <button type="submit" ng-click="exec(mode)" name="button" class="btn btn-{{ btn }}">{{ mode }}</button>
       </form>

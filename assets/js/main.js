@@ -49,6 +49,8 @@ dash.controller('dash', function($scope, $http){
     // })
   }
   $scope.getScore();
+  $('.submenu li a').removeClass('submenu-active');
+  $('#dashboard').addClass('active');
 })
 
 dash.controller('user', function($scope, $http){
@@ -79,6 +81,19 @@ dash.controller('user', function($scope, $http){
     });
   }
 
+  $scope.cek_user = function()
+  {
+    $http.get(backendUrl + "/cek").then(function(resp){
+      $scope.current_user = resp.data.data;
+    });
+  }
+
+  $scope.cek_user();
+
+  $('.sidebar-menu li a').removeClass('active');
+  $('.sidebar-menu ul.submenu li a').removeClass('submenu-active');
+  $('#user').addClass('submenu-active');
+
   $scope.blokir = "0";
 
   $scope.tambah_user = function(id, nama, username, aktif, mode, btn)
@@ -93,8 +108,7 @@ dash.controller('user', function($scope, $http){
       btn = 'next';
     }
     $scope.id = id;
-    aktif = aktif + "";
-    $scope.aktif = aktif;
+    $scope.blokir = aktif + "";
     $scope.nama_lengkap = nama;
     $scope.username = username;
     $scope.mode = mode;
@@ -266,6 +280,10 @@ dash.controller('user', function($scope, $http){
 });
 
 dash.controller('selesai', function($scope, $http){
+
+  $('.sidebar-menu li a').removeClass('active');
+  $('.sidebar-menu ul.submenu li a').removeClass('submenu-active');
+  $('#selesai').addClass('submenu-active');
 
   $scope.batas = "5";
   $scope.sort = "asc";
@@ -455,6 +473,16 @@ dash.controller('selesai', function($scope, $http){
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
+
+      if (hasil.nik == '' || hasil.nik == null)
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
+      }
+      else
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Akte Kelahiran"
+      }
+
       $scope.nomor_kk = hasil.no_kk;
       $scope.nama_kepala_keluarga = hasil.nama_kepala_keluarga;
       $scope.nama_bayi = hasil.nama;
@@ -599,6 +627,10 @@ dash.controller('selesai', function($scope, $http){
 })
 
 dash.controller('verif', function($scope, $http){
+
+  $('.sidebar-menu li a').removeClass('active');
+  $('.sidebar-menu ul.submenu li a').removeClass('submenu-active');
+  $('#verif').addClass('submenu-active');
 
   $scope.batas = "5";
   $scope.sort = "asc";
@@ -796,6 +828,16 @@ dash.controller('verif', function($scope, $http){
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
+
+      if (hasil.nik == '' || hasil.nik == null)
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
+      }
+      else
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Akte Kelahiran"
+      }
+
       $scope.nomor_kk = hasil.no_kk;
       $scope.verif = verif;
       $scope.nama_kepala_keluarga = hasil.nama_kepala_keluarga;
@@ -941,6 +983,10 @@ dash.controller('verif', function($scope, $http){
 })
 
 dash.controller('blm_verif', function($scope, $http){
+
+  $('.sidebar-menu li a').removeClass('active');
+  $('.sidebar-menu ul.submenu li a').removeClass('submenu-active');
+  $('#blm_verif').addClass('submenu-active');
 
   $scope.batas = "5";
   $scope.sort = "asc";
@@ -1137,6 +1183,16 @@ dash.controller('blm_verif', function($scope, $http){
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
       $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
+
+      if (hasil.nik == '' || hasil.nik == null)
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
+      }
+      else
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Akte Kelahiran"
+      }
+
       $scope.nomor_kk = hasil.no_kk;
       $scope.nama_kepala_keluarga = hasil.nama_kepala_keluarga;
       $scope.nama_bayi = hasil.nama;
@@ -1282,6 +1338,10 @@ dash.controller('blm_verif', function($scope, $http){
 
 dash.controller('listPendaftaran', function($scope, $http, data){
 
+  $('.sidebar-menu li a').removeClass('active');
+  $('.sidebar-menu ul.submenu li a').removeClass('submenu-active');
+  $('#semua').addClass('submenu-active');
+
   $('#jam').DateTimePicker(data.datepickerSetting());
 
   $scope.batas = "5";
@@ -1299,6 +1359,21 @@ dash.controller('listPendaftaran', function($scope, $http, data){
       $(this).siblings('div.containers').slideToggle();
     });
   });
+
+  $scope.cekKK = function()
+  {
+    $http.get(backendUrl + '/ambil_keluarga/' + $scope.nomor_kk).then(function(resp){
+      var val = resp.data.data.kepala_keluarga;
+      if (val != null)
+      {
+        $scope.data.nama_kepala_keluarga = val.NAMA_LGKP;
+      }
+      else
+      {
+        $('.notifikasi').notifikasi('Nomor KK Tidak Valid');
+      }
+    })
+  }
 
   $scope.cekIbu = function(nik)
   {
@@ -1619,8 +1694,17 @@ dash.controller('listPendaftaran', function($scope, $http, data){
   $scope.detail = function(id_bayi) {
     moment.locale('id');
     $http.get(backendUrl + "/ambil_detail_pendaftaran/" + id_bayi).then(function(resp){
-      $scope.id_bayi = id_bayi;
       var hasil = resp.data.data;
+      if (hasil.nik == '' || hasil.nik == null)
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Kartu Keluarga & Akte Kelahiran";
+      }
+      else
+      {
+        $scope.keterangan_pendaftaran = "Pembuatan Akte Kelahiran"
+      }
+
+      $scope.id_bayi = id_bayi;
       $scope.nomor_kk = hasil.no_kk;
       $scope.nama_kepala_keluarga = hasil.nama_kepala_keluarga;
       $scope.nama_bayi = hasil.nama;
