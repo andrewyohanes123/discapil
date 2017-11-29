@@ -3011,7 +3011,7 @@ app.controller('saksi1', function($scope, data, $cookies, $http){
   $scope.jen_kelamin = 'Laki-laki'
 });
 
-app.controller('pelapor', function($scope, dataPenduduk,data, $cookies, $http){
+app.controller('pelapor', function($scope,data, $cookies, $http){
 
   $('#nik').on('keyup', function(){
     var val = $(this).val();
@@ -3711,6 +3711,50 @@ app.controller('bayi', function($scope, data, $cookies, $http){
 
   $scope.jen_kel = 'Laki-laki';
 
+  $('#tempat').change(function(){
+    if ($(this).val() == 'Lainnya')
+    {
+      $('#tempat_lain').attr('type', 'text');
+    }
+    else
+    {
+      $('#tempat_lain').attr('type', 'hidden');
+    }
+  });
+
+  $('#jenis_kelahiran').change(function(){
+    if ($(this).val() == 'Lainnya')
+    {
+      $('#jen_kelahiran').attr('type', 'text');
+    }
+    else
+    {
+      $('#jen_kelahiran').attr('type', 'hidden');
+    }
+  });
+
+  $('#kelahiran_ke').change(function(){
+    if ($(this).val() == 'Lainnya')
+    {
+      $('#kel_ke').attr('type', 'text');
+    }
+    else
+    {
+      $('#kel_ke').attr('type', 'hidden');
+    }
+  });
+
+  $('#penolong_kelahiran').change(function(){
+    if ($(this).val() == 'Lainnya')
+    {
+      $('#penolong_kelahiran_input').attr('type', 'text');
+    }
+    else
+    {
+      $('#penolong_kelahiran_input').attr('type', 'hidden');
+    }
+  });
+
   $scope.cek = function(nik)
   {
     $('.loading').loadingMsg('show', 'Loading');
@@ -3935,22 +3979,169 @@ app.controller('bayi', function($scope, data, $cookies, $http){
     }
     else
     {
-      var data = {
-        nik : $scope.nik_bayi,
-        nama : $scope.nama,
-        jenis_kelamin : $scope.jen_kel,
-        tempat_dilahirkan : $scope.tempat,
-        tempat_kelahiran : $scope.tempatkel,
-        prov_kelahiran : $scope.provinsi,
-        kotakab_kelahiran : $scope.kabupatenkota,
-        tanggal_lahir : $scope.tglLahir,
-        jenis_kelahiran : $scope.jen_kelahiran,
-        kelahiran_ke : $scope.kelahiran_ke,
-        penolong_kelahiran : $scope.penolong_kelahiran,
-        berat : $('#berat').val(),
-        panjang : $('#panjang').val(),
-        waktu_lahir : $('#jam').val()
+      var lainnya = {
+        tempat : $('#tempat_lain').attr('type'),
+        jenis_kelahiran : $('#jen_kelahiran').attr('type'),
+        kelahiran_ke : $('#kel_ke').attr('type'),
+        penolong_kelahiran : $('#penolong_kelahiran_input').attr('type')
       }
+
+      if (lainnya.penolong_kelahiran == 'text')
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat_input,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+      else
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+
+      if (lainnya.tempat == 'text')
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat_input,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+      else
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+
+      if (lainnya.kelahiran_ke == 'text')
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke_input,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+      else
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+
+      if (lainnya.jenis_kelahiran == 'text')
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke_input,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+      else
+      {
+        var data = {
+          nik : $scope.nik_bayi,
+          nama : $scope.nama,
+          jenis_kelamin : $scope.jen_kel,
+          tempat_dilahirkan : $scope.tempat,
+          tempat_kelahiran : $scope.tempatkel,
+          prov_kelahiran : $scope.provinsi,
+          kotakab_kelahiran : $scope.kabupatenkota,
+          tanggal_lahir : $scope.tglLahir,
+          jenis_kelahiran : $scope.jen_kelahiran,
+          kelahiran_ke : $scope.kelahiran_ke,
+          penolong_kelahiran : $scope.penolong_kelahiran,
+          berat : $('#berat').val(),
+          panjang : $('#panjang').val(),
+          waktu_lahir : $('#jam').val()
+        }
+      }
+
       $cookies.putObject('bayi', data);
       window.location.replace(baseUrl + "#!/halaman3");
     }

@@ -28,7 +28,7 @@
           <option value="Rumah">Rumah</option>
           <option value="Lainnya">Lainnya</option>
         </select>
-        <input id="tempatLain" type="text" class="input" placeholder="Tempat lain" name="" value="">
+        <input type="hidden" id="tempat_lain" class="input" ng-model="tempat_input" placeholder="Lainnya" name="" value="">
         <label for="tempatkel">Tempat kelahiran</label>
         <div class="input-group">
           <div class="input-addon">
@@ -56,28 +56,31 @@
         <input type="text" data-field="time" class="input" id="jam" ng-model="pukul" name="" value="">
         <h5 class="input-alert" id="jam_alert"><i class="fa fa-exclamation-circle fa-lg"></i>&nbsp;Pilih jam</h5>
         <label for="">Jenis Kelahiran</label>
-        <select ng-model="jen_kelahiran" class="input" name="">
+        <select id="jenis_kelahiran" ng-model="jen_kelahiran" class="input" name="">
           <option value="Tunggal">Tunggal</option>
           <option value="Kembar 2">Kembar 2</option>
           <option value="Kembar 3">Kembar 3</option>
           <option value="Kembar 4">Kembar 4</option>
           <option value="Lainnya">Lainnya</option>
         </select>
+        <input type="hidden" id="jen_kelahiran" class="input" ng-model="jen_kelahiran_input" placeholder="Jenis Kelahiran Lainnya" name="" value="">
         <label for="">Kelahiran ke</label>
-        <select ng-model="kelahiran_ke" class="input" name="">
+        <select ng-model="kelahiran_ke" id="kelahiran_ke" class="input" name="">
           <option value="Pertama">Pertama</option>
           <option value="Kedua">Kedua</option>
           <option value="Ketiga">Ketiga</option>
           <option value="Keempat">Keempat</option>
           <option value="Lainnya">Lainnya</option>
         </select>
+        <input type="hidden" id="kel_ke" class="input" ng-model="kelahiran_ke_input" placeholder="Kelahiran ke" name="" value="">
         <label for="">Penolong kelahiran</label>
-        <select ng-model="penolong_kelahiran" class="input" name="">
+        <select id="penolong_kelahiran" ng-model="penolong_kelahiran" class="input" name="">
           <option value="Dokter">Dokter</option>
           <option value="Bidan/Perawat">Bidan/Perawat</option>
           <option value="Dukun">Dukun</option>
           <option value="Lainnya">Lainnya</option>
         </select>
+        <input type="hidden" class="input" id="penolong_kelahiran_input" ng-model="penolong_kelahiran_input" placeholder="Lainnya" name="" value="">
         <label for="">Berat bayi</label>
         <div class="input-group">
           <input type="number" id="berat" ng-model="berat" class="input" name="" value="">
