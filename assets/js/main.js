@@ -3308,6 +3308,10 @@ app.controller('ayah', function($scope, data, $cookies, $http){
     $scope.nik_ayah = datas.nik_ayah
   }
   $scope.orgManado = $cookies.getObject('ibu');
+  if (!$scope.orgManado.ibu_org_manado)
+  {
+    $('#luarManado').hide();
+  }
   // $('#nik').on('blur', function(){
   //   var nik = $(this).val();
   //   $http.get(backendUrl + '/ambil_penduduk/' + $scope.nik_ayah).then(function(resp){
@@ -3457,8 +3461,20 @@ app.controller('ibu', function($scope, data, $cookies, $http){
   }
   else
   {
-    $scope.nama_ibu = datas.nama_ibu;
-    $scope.nik = datas.nik_ibu
+    if (!datas.ibu_org_manado)
+    {
+      $('#manado').hide();
+      $('#luar_manado').show();
+      $('.tab').removeClass('click');
+      $('#luarManado').addClass('click');
+      $scope.nama_lengkap = datas.nama_ibu;
+      $scope.nik_luar = datas.nik_ibu;
+    }
+    else
+    {
+      $scope.nama_ibu = datas.nama_ibu;
+      $scope.nik = datas.nik_ibu
+    }
   }
 
   $('#tanggal').DateTimePicker(data.datepickerSetting());
@@ -3575,7 +3591,6 @@ app.controller('ibu', function($scope, data, $cookies, $http){
       }
       else if (nik == '' || nik == null && nama == '' || nama == null)
       {
-        console.log('error');
         $('#nik').addClass('input-error');
         $('.notifikasi').notifikasi('Masukkan NIK!', 3000);
       }
@@ -3615,8 +3630,8 @@ app.controller('ibu', function($scope, data, $cookies, $http){
       else
       {
         var data = {
-          nik_ibu : nik,
-          nama_ibu : nama,
+          nik_ibu : $scope.nik_luar,
+          nama_ibu : $scope.nama_lengkap,
           ibu_org_manado : 0
         }
         $cookies.putObject('ibu', data);
